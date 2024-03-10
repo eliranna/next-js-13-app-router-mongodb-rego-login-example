@@ -8,7 +8,7 @@ const Assistant = ({messages}: {messages: Message[]}) => {
     
     useEffect(() => {
         messages && messages.length > 0 && setCurrentMessage(messages[messages.length-1].content)
-    }, messages)
+    }, [messages])
 
     return (
         <div>
