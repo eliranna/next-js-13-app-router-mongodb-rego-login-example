@@ -4,10 +4,9 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
 import { useUserService } from '_services';
+import { Suspense } from 'react';
 
-export default Register;
-
-function Register() {
+const RegisterForm = () => {
     const userService = useUserService();
 
     // get functions to build form with useForm() hook
@@ -63,3 +62,17 @@ function Register() {
         </div>
     );
 }
+
+const RegisterFallback = () => {
+  return <>placeholder</>
+}
+
+const Register = () => {
+    return (
+        <Suspense fallback={<RegisterFallback />}>
+            <RegisterForm/>
+        </Suspense>
+    )
+}
+
+export default Register;

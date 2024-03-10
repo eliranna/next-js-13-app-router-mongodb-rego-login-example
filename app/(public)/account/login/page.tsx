@@ -5,13 +5,7 @@ import { useForm } from 'react-hook-form';
 
 import { useUserService } from '_services';
 
-export default Login;
-
-function SearchBarFallback() {
-  return <>placeholder</>
-}
-
-function Login() {
+const LoginForm = () => {
     const userService = useUserService();
 
     // get functions to build form with useForm() hook
@@ -28,7 +22,6 @@ function Login() {
     }
 
     return (
-        <Suspense fallback={<SearchBarFallback />}>
             <div className="card">
                 <h4 className="card-header">Login</h4>
                 <div className="card-body">
@@ -51,6 +44,20 @@ function Login() {
                     </form>
                 </div>
             </div>
-        </Suspense>
     );
 }
+
+const LoginFallback = () => {
+  return <>placeholder</>
+}
+
+const Login = () => {
+    return (
+        <Suspense fallback={<LoginFallback />}>
+            <LoginForm/>
+        </Suspense>
+    )
+}
+
+
+export default Login;
