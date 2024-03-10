@@ -31,3 +31,36 @@
     border-radius: 0;
   }
 }
+
+/* Code Mirror Definitions */ 
+.ͼ1.cm-focused {
+  outline: none;
+}
+
+.ͼ2 .cm-activeLineGutter {
+  background-color: transparent;
+}
+
+.cm-placeholder {
+  color: rgb(189, 189, 189) !important;
+}
+
+.cm-activeLineGutter {
+  color: rgb(189, 189, 189) !important;  
+}
+
+.cm-gutterElement {
+  color: #eee;
+}
+
+.ͼ2 .cm-gutters {
+  border-right: none;
+}
+
+.ͼ3 .cm-gutters {
+  background-color: transparent;
+}
+
+.cm-editor {
+  height: 100%;
+}

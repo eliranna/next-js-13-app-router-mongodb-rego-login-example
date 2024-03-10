@@ -1,4 +1,4 @@
-import { CourseSummary } from '_types/Course';
+import { CourseSummary } from '_types/course';
 import Image from './base/Image';
 import Avatar from './base/Avatar';
 

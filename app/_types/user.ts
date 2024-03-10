@@ -1,4 +1,4 @@
-import { CourseId } from "./Course";
+import { CourseId } from "./course";
 
 export type UserId = string;
 

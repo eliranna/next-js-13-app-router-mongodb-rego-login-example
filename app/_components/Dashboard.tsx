@@ -1,9 +1,8 @@
 import Link from "next/link";
 import CourseCard from "./CourseCard";
-import RootLayout from "./RootLayout";
 import Grid from "./base/Grid";
 import { Page } from "./base/Page";
-import { Course, CourseSummary } from "_types/Course";
+import { CourseSummary } from "_types/course";
 
 const Dashboard = () => {
 
