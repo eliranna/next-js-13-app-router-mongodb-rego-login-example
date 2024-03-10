@@ -22,7 +22,7 @@ const python = {
   value: "python",
 }
 
-const Workspace = ({task}: {task?: Task}) => {
+const Codespace = ({task}: {task?: Task}) => {
 
   const [code, setCode] = useState<string>("");
   
@@ -116,4 +116,4 @@ const Workspace = ({task}: {task?: Task}) => {
   )
 }
 
-export default Workspace
+export default Codespace

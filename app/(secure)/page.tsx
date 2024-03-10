@@ -1,30 +1,19 @@
-'use client';
+'use client'
+import { useEffect } from 'react'
+import { useUserService } from '_services'
+import { Spinner } from '_components'
+import Dashboard from '_components/Dashboard'
 
-import Link from 'next/link';
-import { useEffect } from 'react';
+const Home = () => {
 
-import { useUserService } from '_services';
-import { Spinner } from '_components';
-
-export default Home;
-
-function Home() {
-    const userService = useUserService();
-    const user = userService.currentUser;
+    const { currentUser, getCurrent } = useUserService();
 
     useEffect(() => {
-        userService.getCurrent();
+        getCurrent();
     }, []);
 
-    if (user) {
-        return (
-            <>
-                <h1>Hi {user.firstName}!</h1>
-                <p>You&apos;re logged in with Next.js & JWT!!</p>
-                <p><Link href="/users">Manage Users</Link></p>
-            </>
-        );
-    } else {
-        return <Spinner />;
-    }
+    return currentUser ? <Dashboard/> : <Spinner/>
+
 }
+
+export default Home

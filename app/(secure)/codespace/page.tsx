@@ -1,5 +1,5 @@
 import Navbar from "_components/Navbar"
-import Workspace from "_components/Workspace"
+import Codespace from "_components/Codespace"
 import { Task } from "_types/exercise"
 
 const task: Task = {
@@ -52,7 +52,7 @@ const TaskPage = () => {
                 <Navbar/>
             </div>
             <div className="h-full">
-                <Workspace task={task}/>
+                <Codespace task={task}/>
             </div>
         </div>
     )
