@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useRef } from "react";
 
 const AutoScrollDiv = ({ children }: {children: ReactNode}) => {
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (scrollRef.current) {
