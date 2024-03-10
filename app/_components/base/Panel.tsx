@@ -16,4 +16,6 @@ const Panel: React.FC<PanelProps> = React.forwardRef((props, ref) => {
     );
 });
 
+Panel.displayName = 'Panel';
+
 export default Panel;

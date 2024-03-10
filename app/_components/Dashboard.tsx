@@ -18,8 +18,8 @@ const Dashboard = () => {
                 </div>
                 <div className="lg:col-start-4 lg:col-span-7 flex gap-6">
                 {courses.map(course => (
-                    <Link href={`course/${course.iid}`}>
-                    <CourseCard course={course}/>
+                    <Link key={course.iid} href={`course/${course.iid}`}>
+                        <CourseCard course={course}/>
                     </Link>
                 ))}              
                 </div>
