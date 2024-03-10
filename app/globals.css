@@ -1,3 +1,66 @@
-.app-container {
-    min-height: 350px;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.code {
+  p {
+    margin-bottom: 20px;
+  }
+  list-style: inside!important; 
+}
+
+.markdown {
+  code {
+    background: #eee;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 500px;
+    color: black;
+  }
+
+  pre {
+    background-color: #1f2937;
+  }
+
+  pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+    border-radius: 0;
+  }
+}
+
+/* Code Mirror Definitions */ 
+.ͼ1.cm-focused {
+  outline: none;
+}
+
+.ͼ2 .cm-activeLineGutter {
+  background-color: transparent;
+}
+
+.cm-placeholder {
+  color: rgb(189, 189, 189) !important;
+}
+
+.cm-activeLineGutter {
+  color: rgb(189, 189, 189) !important;  
+}
+
+.cm-gutterElement {
+  color: #eee;
+}
+
+.ͼ2 .cm-gutters {
+  border-right: none;
+}
+
+.ͼ3 .cm-gutters {
+  background-color: transparent;
+}
+
+.cm-editor {
+  height: 100%;
 }

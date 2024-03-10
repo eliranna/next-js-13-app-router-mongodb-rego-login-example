@@ -14,11 +14,9 @@ function Layout({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <div className="app-container bg-light">
-            <Nav />
-            <Alert />
-            <div className="p-4">
-                <div className="container">
+        <div>
+            <div>
+                <div>
                     {children}
                 </div>
             </div>
