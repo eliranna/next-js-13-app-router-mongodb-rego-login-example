@@ -1,11 +1,15 @@
 'use client';
-
+import { Suspense } from 'react'
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
 import { useUserService } from '_services';
 
 export default Login;
+
+function SearchBarFallback() {
+  return <>placeholder</>
+}
 
 function Login() {
     const userService = useUserService();
@@ -24,27 +28,29 @@ function Login() {
     }
 
     return (
-        <div className="card">
-            <h4 className="card-header">Login</h4>
-            <div className="card-body">
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="mb-3">
-                        <label className="form-label">Username</label>
-                        <input {...fields.username} type="text" className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
-                        <div className="invalid-feedback">{errors.username?.message?.toString()}</div>
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">Password</label>
-                        <input {...fields.password} type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
-                        <div className="invalid-feedback">{errors.password?.message?.toString()}</div>
-                    </div>
-                    <button disabled={formState.isSubmitting} className="btn btn-primary">
-                        {formState.isSubmitting && <span className="spinner-border spinner-border-sm me-1"></span>}
-                        Login
-                    </button>
-                    <Link href="/account/register" className="btn btn-link">Register</Link>
-                </form>
+        <Suspense fallback={<SearchBarFallback />}>
+            <div className="card">
+                <h4 className="card-header">Login</h4>
+                <div className="card-body">
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <div className="mb-3">
+                            <label className="form-label">Username</label>
+                            <input {...fields.username} type="text" className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
+                            <div className="invalid-feedback">{errors.username?.message?.toString()}</div>
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Password</label>
+                            <input {...fields.password} type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
+                            <div className="invalid-feedback">{errors.password?.message?.toString()}</div>
+                        </div>
+                        <button disabled={formState.isSubmitting} className="btn btn-primary">
+                            {formState.isSubmitting && <span className="spinner-border spinner-border-sm me-1"></span>}
+                            Login
+                        </button>
+                        <Link href="/account/register" className="btn btn-link">Register</Link>
+                    </form>
+                </div>
             </div>
-        </div>
+        </Suspense>
     );
 }
