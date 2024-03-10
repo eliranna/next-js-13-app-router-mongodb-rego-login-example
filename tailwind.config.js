@@ -9,10 +9,10 @@ module.exports = {
         DEFAULT: {
           css: {
             'code::before': {
-              content: '&nbsp;&nbsp;',
+              content: '',
             },
             'code::after': {
-              content: '&nbsp;&nbsp;',
+              content: '',
             },
             code: {
               wordWrap: 'break-word',
