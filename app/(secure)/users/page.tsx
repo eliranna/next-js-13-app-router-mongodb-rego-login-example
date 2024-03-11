@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect } from 'react';
 
-import { Spinner } from '_components/base/Spinner';
+import Spinner from '_components/base/Spinner';
 import { useUserService } from '_services';
 
 export default Users;

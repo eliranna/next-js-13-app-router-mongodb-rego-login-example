@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { AddEdit } from '_components/users';
-import { Spinner } from '_components/base/Spinner'
+import Spinner from '_components/base/Spinner'
 import { useUserService } from '_services';
 
 export default Edit;
