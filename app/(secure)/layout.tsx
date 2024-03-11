@@ -12,9 +12,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     }
 
     return (
-        <RootLayout>
+        <div>
             {children}
-        </RootLayout>
+        </div>
     );
 }
 

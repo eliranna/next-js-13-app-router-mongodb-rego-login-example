@@ -2,11 +2,16 @@ import Link from "next/link";
 import CourseCard from "./CourseCard";
 import Grid from "./base/Grid";
 import { Page } from "./base/Page";
-import { CourseSummary } from "_types/course";
+import { useCourseService } from '_services';
+import { useEffect } from "react";
 
 const Dashboard = () => {
 
-    const courses: CourseSummary[] = []
+    const {courses, getAll} = useCourseService();
+
+    useEffect(() => {
+        getAll()
+    }, [])
 
     return (
         <Page>
@@ -17,9 +22,9 @@ const Dashboard = () => {
                     </span>
                 </div>
                 <div className="lg:col-start-4 lg:col-span-7 flex gap-6">
-                {courses.map(course => (
-                    <Link key={course.iid} href={`course/${course.iid}`}>
-                        <CourseCard course={course}/>
+                {courses?.length && courses.map(course => (
+                    <Link key={course.courseId} href={`course/${course.courseId}`}>
+                        {course.title}
                     </Link>
                 ))}              
                 </div>

@@ -47,13 +47,8 @@ except ValueError as e:
 
 const TaskPage = () => {
     return (
-        <div className="h-screen flex flex-col">
-            <div>
-                <Navbar/>
-            </div>
-            <div className="h-full">
-                <Codespace task={task}/>
-            </div>
+        <div className="h-screen">
+            <Codespace task={task}/>
         </div>
     )
 }
