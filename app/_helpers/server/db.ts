@@ -41,7 +41,7 @@ function userModel() {
 
 function courseModel() {
     const schema = new Schema({
-        courseId: { type: String, unique: true, required: true },
+        id: { type: String, unique: true, required: true },
         title: { type: String, required: true },
         description: { type: String, required: true },
         lastName: { type: String, required: true },
@@ -55,7 +55,6 @@ function courseModel() {
         virtuals: true,
         versionKey: false,
         transform: function (doc, ret) {
-            delete ret._id;
             delete ret.hash;
         }
     });

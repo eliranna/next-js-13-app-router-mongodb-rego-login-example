@@ -1,8 +1,8 @@
 import { ImSpinner2 } from "react-icons/im";
 
 const Spinner = () => (
-    <div className="animate-spin">
-        <ImSpinner2/>
+    <div>
+        <ImSpinner2 className="animate-spin"/>
     </div>
 )
 

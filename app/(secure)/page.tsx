@@ -1,8 +1,8 @@
 'use client'
 import { useEffect } from 'react'
 import { useUserService } from '_services'
-import { Spinner } from '_components'
 import Dashboard from '_components/Dashboard'
+import Spinner from '_components/base/Spinner'
 
 const Home = () => {
 
