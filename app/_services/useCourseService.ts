@@ -41,7 +41,56 @@ export interface ICourse {
 
 export interface IModule {
     _id: string,
-    title: string
+    title: string,
+    items?: IModuleItem[]
+}
+
+export type InputType = 'text' | 'code' | 'math' | 'selection'
+
+export type Addition = {
+  _id: string;
+  type: InputType,
+  content?: string
+}
+
+export type Answare = {
+  _id: string;
+  content?: string
+}
+
+export interface Option {
+  _id: string;
+  caption: string;
+  isCorrect: boolean;
+}
+
+export interface IQuestion {
+    _id: string;
+    position: number;
+    caption?: string;
+    additions?: Addition[];
+    inputType?: InputType;
+    options?: Option[];
+    answare?: Answare;
+}
+
+export interface ICodingChallange {
+    _id: string;
+    type: IModuleItemType;
+    title: string,
+    description?: string,
+    initialCode?: string
+}
+
+export type IModuleItemType = 'exercise' | 'codingChallenge'
+
+export type IModuleItem = {
+    _id: string;
+    type: IModuleItemType;
+    title: string,
+    description?: string,
+    initialCode?: string,
+    questions?: IQuestion[]
 }
 
 interface ICourseStore {

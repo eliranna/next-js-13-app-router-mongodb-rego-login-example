@@ -7,21 +7,16 @@ import { useCourseService } from '_services';
 import Spinner from '_components/base/Spinner';
 import Course from '_components/Course';
 
-const CoursePage = ({ params: { id } }: any) => {
+const CoursePage = ({ params: { courseId } }: any) => {
 
     const router = useRouter();
     const {course, getById} = useCourseService();
 
     useEffect(() => {
-        console.log(id)
-        if (!id) return;
-        getById(id)
+        if (!courseId) return;
+        getById(courseId)
     }, [router]);
     
-    useEffect(() => {
-        console.log(course)
-    }, [course])
-
     return course
         ? <Course course={course} />
         : <Spinner />;

@@ -63,6 +63,7 @@ const Accordion = ({items = [], onTitleChange}: {items?: AccordionItem[], onTitl
                                     <TextInput 
                                         readOnly={!isOnEditingMode(index)}
                                         initialValue={item.title}
+                                        eng
                                         focused 
                                         className='w-full cursor-pointer' 
                                         ghost 

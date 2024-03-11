@@ -40,18 +40,51 @@ function userModel() {
 }
 
 function courseModel() {
-    const schema = new Schema({
-        id: { type: String, unique: true, required: true },
+
+    const optionSchema = new Schema({
+        caption: { type: String, required: true },
+        isCorrect: { type: Boolean, required: true },
+      });
+      
+      const questionSchema = new Schema({
+        position: { type: Number, required: true },
+        caption: String,
+        additions: [{
+          type: { type: String, enum: ['text', 'code', 'math', 'selection'], required: true },
+          content: String,
+        }],
+        inputType: { type: String, enum: ['text', 'code', 'math', 'selection'] },
+        options: [optionSchema],
+        answer: {
+          content: String,
+        },
+      });
+      
+      const moduleItemSchema = new Schema({
+        type: { type: String, required: true, enum: ['exercise', 'codingChallenge'] },
+        initialCode: { type: String },
+        questions: [questionSchema],
+        title: { type: String },
+        description: { type: String },
+      });   
+
+        // Define the module schema that uses items
+        const moduleSchema = new Schema({
+            title: String,
+            items: [moduleItemSchema],
+        });
+
+
+    const courseSchema = new Schema({
         title: { type: String, required: true },
         description: { type: String, required: true },
-        lastName: { type: String, required: true },
         publicId: { type: String, required: true },
+        modules: [moduleSchema]
     }, {
-        // add createdAt and updatedAt timestamps
         timestamps: true
     });
 
-    schema.set('toJSON', {
+    courseSchema.set('toJSON', {
         virtuals: true,
         versionKey: false,
         transform: function (doc, ret) {
@@ -59,5 +92,5 @@ function courseModel() {
         }
     });
 
-    return mongoose.models.Course || mongoose.model('Course', schema);
+    return mongoose.models.Course || mongoose.model('Course', courseSchema);
 }

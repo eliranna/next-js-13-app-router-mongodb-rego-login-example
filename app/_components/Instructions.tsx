@@ -1,7 +1,7 @@
-import { Task } from "_types/exercise"
 import Markdown from "./base/Markdown"
+import { ICodingChallange } from "_services/useModuleItemService"
 
-const Instructions = ({task}: {task?: Task}) => {
+const Instructions = ({task}: {task?: ICodingChallange}) => {
   return (
     <div>
       {task && (

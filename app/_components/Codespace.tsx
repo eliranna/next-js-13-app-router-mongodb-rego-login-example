@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useChat } from 'ai/react';
 import { ImperativePanelHandle, PanelGroup} from "react-resizable-panels";
 import CodeEditor from './CodeEditor';
-import { Task } from '_types/exercise';
 import SelectionTooltip from './SelectionTooltip';
 import useCompile from '_helpers/client/useCompile'
 import useSelectionTooltip from '_helpers/client/useSelectionTooltip'
@@ -14,6 +13,7 @@ import { Suggestion } from "_types/assistant";
 import ExecutionPanel from "./ExecutionPanel";
 import ResizeHandle from "./base/ResizeHandle";
 import Panel from "./base/Panel";
+import { IModuleItem } from '_services';
 
 const python = {
   id: 71,
@@ -22,7 +22,7 @@ const python = {
   value: "python",
 }
 
-const Codespace = ({task}: {task?: Task}) => {
+const Codespace = ({task}: {task?: IModuleItem}) => {
 
   const [code, setCode] = useState<string>("");
   
@@ -44,7 +44,6 @@ const Codespace = ({task}: {task?: Task}) => {
 
   useEffect(() => {
     const panel = ref.current;
-    console.log(panel)
     if (panel) {
       panel.resize(assistantPanelIsOpen ? 60 : 10);
     }
@@ -74,7 +73,7 @@ const Codespace = ({task}: {task?: Task}) => {
   }
 
   return (
-    <>
+    <div className='h-screen'>
       {isTooltipVisible && (
         <SelectionTooltip position={tooltipPosition} onSelectionQuery={handleSelectionQuery}/>
       )}
@@ -112,7 +111,7 @@ const Codespace = ({task}: {task?: Task}) => {
             disableExecute={!code}/>
         </Panel>
       </PanelGroup> 
-    </>   
+    </div>   
   )
 }
 

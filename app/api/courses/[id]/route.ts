@@ -1,7 +1,3 @@
-import joi from 'joi';
-
-import { cookies } from 'next/headers';
-
 import { apiHandler } from '_helpers/server/api';
 import { coursesRepo } from '_helpers/server';
 
