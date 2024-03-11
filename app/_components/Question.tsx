@@ -18,7 +18,7 @@ const QuestionNumber = ({value}: {value: number}) => {
     )
 }
 
-const QuestionPrompt = ({id, caption, additions, onChange}: {id: string, caption?: string, additions?: IAddition[], onChange?: any}) => {
+const QuestionPrompt = ({id, caption, additions, editMode, onChange}: {id: string, caption?: string, additions?: IAddition[], editMode?:boolean, onChange?: any}) => {
 
     const handleAddedContent = (inputType: IInputType) => {
         const updatedAdditionsArray = [...(additions || []), {
@@ -70,13 +70,14 @@ const QuestionPrompt = ({id, caption, additions, onChange}: {id: string, caption
                     <TextInput 
                         eng
                         initialValue={caption}
+                        readOnly={!editMode}
                         placeholder="Insert the question"
                         onChange={(caption: string) => {
                             onChange({
                                 caption
                             })
                         }}
-                        CustomOptions = {<AdditionsMenu/>}
+                        CustomOptions = {editMode && <AdditionsMenu/>}
                     />
                 </Body>
             </div>
@@ -143,13 +144,18 @@ const AnswarePrompt = ({type, content, onChange}: {type?: IInputType, content?: 
     )
 }
 
-const Option = ({option, withDelete, onChange, onDelete}: {option: IOption, withDelete?: boolean, onChange: any, onDelete: any}) => (
-    <div>
-        <TextInput withDelete={withDelete} initialValue={option.caption} placeholder="הכנס אפשרות בחירה" onChange={onChange} onDelete={onDelete}/>
+const Option = ({option, withDelete, editMode, onChange, onDelete}: {option: IOption, withDelete?: boolean, editMode?: boolean, onChange: any, onDelete: any}) => (
+    <div className="flex gap-8 ">
+        <div className="flex flex-col justify-center">
+            <div className="w-3 h-3 rounded-full border border-some-gray cursor-pointer"/>
+        </div>
+        <div className="w-full flex flex-col justify-center">
+            <TextInput eng readOnly={!editMode} withDelete={withDelete} initialValue={option.caption} placeholder="Insert Option" onChange={onChange} onDelete={onDelete}/>
+        </div>
     </div>
 )
 
-const Question = ({question, onChange}: {question: IQuestion, onChange?: any}) => {
+const Question = ({question, editMode, onChange}: {question: IQuestion, editMode?: boolean, onChange?: any}) => {
 
     const handleChange = (change: any) => {
         onChange({
@@ -205,18 +211,21 @@ const Question = ({question, onChange}: {question: IQuestion, onChange?: any}) =
                             id={question._id}
                             caption={question.caption} 
                             additions={question.additions}
+                            editMode={editMode}
                             onChange={handleChange}
                             />
                     </div>
                     <div className="flex flex-col gap-8">
-                        <div>
-                            <InputTypeSelector
-                                inputType={question.inputType}
-                                onChange={(inputType: IInputType) => handleChange({
-                                    inputType
-                                })}
-                            />                        
-                        </div>
+                        {editMode && (
+                            <div>
+                                <InputTypeSelector
+                                    inputType={question.inputType}
+                                    onChange={(inputType: IInputType) => handleChange({
+                                        inputType
+                                    })}
+                                />                        
+                            </div>
+                        )}
                         {(question.inputType === 'selection') && (
                             <div className="flex flex-col gap-4">
                                 {question.options?.map((option: IOption, index: number) => (
@@ -224,17 +233,20 @@ const Question = ({question, onChange}: {question: IQuestion, onChange?: any}) =
                                         <Option 
                                             withDelete={question.options && question.options?.length > 2}
                                             option={option} 
+                                            editMode={editMode}
                                             onChange={(caption: string) => handleOptionChange(index, caption)}
                                             onDelete={() => handleOptionRemove(index)}
                                             />
                                     </div>
                                 ))}
-                                <div>
-                                    <Button icon="/icons/plus.svg" caption="הוסף אפשרות" onClick={handleOptionAddition}/>
-                                </div>
+                                {editMode && (
+                                    <div>
+                                        <Button icon="/icons/plus.svg" caption="Insert Option" onClick={handleOptionAddition}/>
+                                    </div>
+                                )}
                             </div>
                         )}
-                        {((question.answare == undefined) && (question.inputType !== 'selection')) ? (
+                        {(editMode && (question.answare == undefined) && (question.inputType !== 'selection')) ? (
                             <div>
                                 <Button icon="/icons/plus.svg" caption="Insert Answare" onClick={() => handleChange({
                                     answare: {

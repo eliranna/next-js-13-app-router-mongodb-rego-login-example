@@ -15,10 +15,7 @@ const QuizPage = ({quiz}: {quiz: IModuleItem}) => {
     return (
         <Page>
             <Grid>
-                <div className="lg:col-start-1 lg:col-span-2">
-
-                </div>
-                <div className="lg:col-start-4 lg:col-span-9 pt-20">
+                <div className="lg:col-start-2 lg:col-span-9 pt-20">
                     {quiz ? <Quiz quiz={quiz}/> : <Spinner/>}
                 </div>
             </Grid>

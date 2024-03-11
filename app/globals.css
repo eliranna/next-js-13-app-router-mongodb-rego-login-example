@@ -74,3 +74,28 @@
   height: 100%;
 }
 
+/* Math Field definitions */ 
+
+math-field {
+  outline: none!important;
+  font-size: 20px;
+}
+
+math-field::part(container):host(:focus) {
+  outline: none!important;
+}
+
+math-field::part(container):host(:focus-within) {
+  outline: none!important;
+}
+
+/* Hide the menu toggle */
+math-field::part(menu-toggle) {
+display: none;
+}
+
+/* Hide the virtual keyboard toggle */
+math-field::part(virtual-keyboard-toggle) {
+display: none;
+}
+

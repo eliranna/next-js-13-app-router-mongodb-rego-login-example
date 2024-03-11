@@ -23,6 +23,15 @@ module.exports = {
           },
         },
       },
+      colors: {
+        'accent': 'black',
+        'accent-light': '#EEEEF3',
+        'light-gray': '#EEEEF3',
+        'apple-gray': '#FAFAFA',
+        'gray':'#D6D6D6',
+        'some-gray': '#909090',
+        'dark-gray': '#5D5D5D'
+      }
     },
   },
   plugins: [

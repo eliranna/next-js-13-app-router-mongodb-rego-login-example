@@ -6,7 +6,7 @@ import TextInput from "./base/TextInput"
 import { defaultInputType } from "_types/course"
 import Question from "./Question"
 
-const Header = ({title, description, onChange}: {title?: string, description?: string, onChange?: any}) => {
+const Header = ({title, description, editMode, onChange}: {title?: string, description?: string, editMode?: boolean; onChange?: any}) => {
     return (
         <div className="flex flex-col gap-6">
             <div>
@@ -14,6 +14,7 @@ const Header = ({title, description, onChange}: {title?: string, description?: s
                     <TextInput 
                         initialValue={title}
                         eng
+                        readOnly={!editMode}
                         placeholder="Quiz title"
                         onChange={(title: string) => onChange({
                             header: {
@@ -77,6 +78,8 @@ const AddQuestion = ({onAddQuestion}: {onAddQuestion: any}) => {
 
 const Quiz = ({quiz}: {quiz: IModuleItem}) => {
 
+    const editMode = false
+
     const handleQuestionChange = () => {}
     const handleAddQuestion = () => {}
     const handleHeaderChange = () => {}
@@ -85,17 +88,19 @@ const Quiz = ({quiz}: {quiz: IModuleItem}) => {
         <div className="w-full flex flex-col gap-16 pb-20">
             <div className="flex flex-col gap-12">
                 <div>
-                    <Header title={quiz.title} description={quiz.description} onChange={handleHeaderChange}/>
+                    <Header editMode={editMode} title={quiz.title} description={quiz.description} onChange={handleHeaderChange}/>
                 </div>
                 <div className="flex flex-col gap-12">
                     {quiz.questions && quiz.questions.map((question: IQuestion) => (
-                        <Question key={question._id} question={question} onChange={handleQuestionChange}/>
+                        <Question editMode={editMode} key={question._id} question={question} onChange={handleQuestionChange}/>
                     ))}
                 </div>
             </div>
-            <div className="flex justify-center">
-                <AddQuestion onAddQuestion={handleAddQuestion}/>
-            </div>
+            {editMode && (
+                <div className="flex justify-center">
+                    <AddQuestion onAddQuestion={handleAddQuestion}/>
+                </div>
+            )}
         </div>
     )
 }

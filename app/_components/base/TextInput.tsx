@@ -143,7 +143,7 @@ const TextInput = ({
     const [onFocus, setOnFocus] = useState(false)
     
     return (
-        <div className={`group w-full ${ghost ? 'border-none' : 'border-b border-light-gray'} flex justify-betwee`}>
+        <div className={`group w-full ${(ghost || readOnly) ? 'border-none' : 'border-b border-light-gray'} flex justify-betwee`}>
             <div className="w-full">
                 <TextArea className={`${className} w-full focus:outline-none resize-none placeholder:text-gray`} readOnly={readOnly} eng={eng} password={password} initialValue={initialValue} focused={focused} placeholder={placeholder} onChange={onChange} onClick={onClick} onFocus={() => setOnFocus(true)} onBlur={(value: string) => {setOnFocus(false); onBlur && onBlur(value)}}/>
             </div>

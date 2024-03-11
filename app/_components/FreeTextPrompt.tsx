@@ -20,7 +20,7 @@ const FreeTextPrompt = ({inputType, content, onChange}: {inputType: IInputType, 
     return (
         <div className="wrapper w-full">
             <div className="input-panel overflow-x-scroll">
-                {inputType === 'text' && <TextInput initialValue={content} onChange={onTextChange} placeholder="הכנס את התשובה"/>}
+                {inputType === 'text' && <TextInput eng initialValue={content} onChange={onTextChange} placeholder="Insert your answare"/>}
                 {inputType === 'code' && <CodeInput code={content} onChange={onCodeChange}/>}
                 {inputType === 'math' && <MathInput formula={content} onChange={onMathChange}/>}
             </div>
