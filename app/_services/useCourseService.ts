@@ -45,20 +45,20 @@ export interface IModule {
     items?: IModuleItem[]
 }
 
-export type InputType = 'text' | 'code' | 'math' | 'selection'
+export type IInputType = 'text' | 'code' | 'math' | 'selection'
 
-export type Addition = {
+export type IAddition = {
   _id: string;
-  type: InputType,
+  type: IInputType,
   content?: string
 }
 
-export type Answare = {
+export type IAnsware = {
   _id: string;
   content?: string
 }
 
-export interface Option {
+export interface IOption {
   _id: string;
   caption: string;
   isCorrect: boolean;
@@ -68,10 +68,10 @@ export interface IQuestion {
     _id: string;
     position: number;
     caption?: string;
-    additions?: Addition[];
-    inputType?: InputType;
-    options?: Option[];
-    answare?: Answare;
+    additions?: IAddition[];
+    inputType?: IInputType;
+    options?: IOption[];
+    answare?: IAnsware;
 }
 
 export interface ICodingChallange {
@@ -82,7 +82,7 @@ export interface ICodingChallange {
     initialCode?: string
 }
 
-export type IModuleItemType = 'exercise' | 'codingChallenge'
+export type IModuleItemType = 'quiz' | 'codingChallenge'
 
 export type IModuleItem = {
     _id: string;

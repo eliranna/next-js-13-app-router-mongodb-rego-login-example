@@ -12,7 +12,7 @@ export default Layout;
 
 function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en">
+        <html lang="en" dir='ltr'>
             <body className={assistant.className}>
                 {children}
             </body>

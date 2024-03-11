@@ -1,4 +1,4 @@
-import { IModule, IModuleItem } from "_services/useCourseService"
+import { IModule, IModuleItem, IModuleItemType } from "_services/useCourseService"
 import Accordion from "./base/Accordion"
 import { ReactNode, useEffect, useState } from "react"
 import { useRouter } from 'next/navigation';
@@ -14,16 +14,29 @@ type AccordionItem = {
 const ModuleItem = ({item, onEnter}: {item: IModuleItem, onEnter?: any}) => {
 
     const timeLeftString = '5 days left'
+
+    const getTypeCaption = (type: IModuleItemType) => {
+        switch (type) {
+            case 'codingChallenge':
+                return 'Coding'
+            case 'quiz':
+                return 'Quiz'
+            default:
+                break;
+        }
+    }
     
     return (
         <div className='relative border border-light-gray p-6'>
             <div className='flex gap-4'>
-                <div className='flex flex-col justify-start text-3xl pt-2'>
-                    <BiAnalyse/>
-                </div>
                 <div className='flex flex-col gap-2'>
                     <div>
-                        <span className='text-xl'>
+                        <span className='text-xs bg-black text-white px-2 py-[1.5px] rounded-full'>
+                            {getTypeCaption(item?.type) || 'Untitled'}
+                        </span>
+                    </div>
+                    <div>
+                        <span className='text-2xl'>
                             {item?.title || 'Untitled'}
                         </span>
                     </div>
@@ -58,11 +71,6 @@ const Module = ({courseId, module}: {courseId: string, module: IModule}) => {
         <div>
             <div className='flex flex-col gap-6'>
                 <div className='flex gap-4'>
-                    <div>
-                        <span className='text-md font-semibold'>
-                            Challenges
-                        </span>
-                    </div>
                     <div>
                         <Button caption='Create new' icon='/icons/plus.svg' onClick={handleCreateItem}/>
                     </div>

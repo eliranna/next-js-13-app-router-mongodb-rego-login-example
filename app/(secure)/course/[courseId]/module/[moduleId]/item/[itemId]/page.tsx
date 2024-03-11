@@ -7,6 +7,24 @@ import { useModuleItemService } from "_services/useModuleItemService";
 import Codespace from '_components/Codespace';
 import Spinner from '_components/base/Spinner';
 import { IModuleItem } from '_services/useCourseService';
+import Quiz from '_components/Quiz';
+import { Page } from '_components/base/Page';
+import Grid from '_components/base/Grid';
+
+const QuizPage = ({quiz}: {quiz: IModuleItem}) => {
+    return (
+        <Page>
+            <Grid>
+                <div className="lg:col-start-1 lg:col-span-2">
+
+                </div>
+                <div className="lg:col-start-4 lg:col-span-9 pt-20">
+                    {quiz ? <Quiz quiz={quiz}/> : <Spinner/>}
+                </div>
+            </Grid>
+        </Page>        
+    )
+}
 
 const ModuleItem = ({ params: { courseId, moduleId, itemId } }: any) => {
 
@@ -19,8 +37,8 @@ const ModuleItem = ({ params: { courseId, moduleId, itemId } }: any) => {
             case "codingChallenge":
                 console.log(moduleItem)
                 return <Codespace task={moduleItem}/>
-            case 'exercise':
-                return <div>quiz</div>
+            case 'quiz':
+                return <QuizPage quiz={moduleItem}/>
             default:
                 break;
         }
