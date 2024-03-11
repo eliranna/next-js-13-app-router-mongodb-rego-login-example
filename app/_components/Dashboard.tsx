@@ -23,7 +23,7 @@ const Dashboard = () => {
                 </div>
                 <div className="lg:col-start-4 lg:col-span-7 flex gap-6">
                 {courses?.length && courses.map(course => (
-                    <Link key={course.id} href={`course/${course._id}`}>
+                    <Link key={course._id} href={`course/${course._id}`}>
                         {course.title}
                     </Link>
                 ))}              
