@@ -34,7 +34,7 @@ const AssistantPanel = ({messages, isOpen, onToggle, onSuggestionClick}: {messag
             </div>
             <div>
                 <div onClick={onToggle} className="cursor-pointer">
-                    <img src='/icons/arrow-down.svg' className={`w-[20px] ${isOpen ? 'rotate-0' : 'rotate-180'} transition-all`}/>
+                    <img src='/icons/down-arrow.svg' className={`w-[20px] ${isOpen ? 'rotate-0' : 'rotate-180'} transition-all`}/>
                 </div>
             </div>
         </div>

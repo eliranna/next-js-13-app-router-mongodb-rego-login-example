@@ -3,7 +3,7 @@ import { Collapse } from 'react-collapse';
 import TextInput from './TextInput';
 
 export type AccordionItem = {
-    id: string,
+    id?: string,
     title?: string,
     content?: ReactNode
 }
@@ -26,7 +26,7 @@ function createStateItemsArray(state: boolean[], items: AccordionItem[]) {
     return resultArray;
 }
 
-const Accordion = ({items, onTitleChange}: {items: AccordionItem[], onTitleChange?: any}) => {
+const Accordion = ({items = [], onTitleChange}: {items?: AccordionItem[], onTitleChange?: any}) => {
 
     const stateArray = new Array(items.length).fill(false)
     const [state, setState] = useState(stateArray)

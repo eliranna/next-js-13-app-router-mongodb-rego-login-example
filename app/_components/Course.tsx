@@ -1,7 +1,15 @@
-import { ICourse } from "_services/useCourseService"
+import { ICourse, IModule } from "_services/useCourseService"
 import Grid from "./base/Grid"
 import { Page } from "./base/Page"
-import Avatar from "./base/Avatar"
+import CourseModules from "./CourseModules"
+
+const modules: IModule[] = [
+    {
+        _id: '1',
+        title: 'Before the Civil War'
+    }
+]
+
 
 const Course = ({ course }: { course: ICourse}) => {
     console.log(course)
@@ -12,7 +20,7 @@ const Course = ({ course }: { course: ICourse}) => {
                     {course.title}
                 </div>
                 <div className='lg:col-start-6 lg:col-span-7'>
-                    Modules                              
+                    <CourseModules modules={modules}/>                             
                 </div>
             </Grid>
         </Page>

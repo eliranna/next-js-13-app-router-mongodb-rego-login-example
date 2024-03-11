@@ -35,6 +35,12 @@ function useCourseService(): ICourseService {
 
 export interface ICourse {
     _id: string,
+    title: string,
+    modules: IModule[]
+}
+
+export interface IModule {
+    _id: string,
     title: string
 }
 
