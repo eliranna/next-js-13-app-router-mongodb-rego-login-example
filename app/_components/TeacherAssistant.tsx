@@ -73,6 +73,14 @@ const TeacherAssistant = ({topics, themes, levels, processing, onGenerateQuestio
     return (
         <div className="flex flex-col p-10 gap-10">
 
+          <div>
+            <div>
+              <RunButton processing={processing} onClick={handleGenerateQuestion} icon="/icons/light.svg">
+                Generate Question
+              </RunButton>
+            </div>
+          </div>          
+
           <div className="flex flex-col gap-8">
             <div className="uppercase text-sm font-semibold text-dark-gray">
               Topics
@@ -100,13 +108,7 @@ const TeacherAssistant = ({topics, themes, levels, processing, onGenerateQuestio
             </div>
           </div>
 
-          <div>
-            <div>
-              <RunButton processing={processing} onClick={handleGenerateQuestion} icon="/icons/light.svg">
-                Generate Question
-              </RunButton>
-            </div>
-          </div>
+
           
             
         </div>
