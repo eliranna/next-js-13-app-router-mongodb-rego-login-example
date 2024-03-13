@@ -8,14 +8,14 @@ export type AccordionItem = {
     content?: ReactNode
 }
 
-function createStateItemsArray(state: boolean[], items: AccordionItem[]) {
+function createStateItemsArray(state: boolean[], items: AccordionItem[], initialState: boolean) {
     // If state is longer than items, return state
     if (state.length > items.length) {
         return state;
     }
 
     // Create a new array with the length of items, initialized with false
-    let resultArray = new Array(items.length).fill(false);
+    let resultArray = new Array(items.length).fill(initialState);
 
     // Set the first values equal to the values of state
     for (let i = 0; i < state.length; i++) {
@@ -26,13 +26,13 @@ function createStateItemsArray(state: boolean[], items: AccordionItem[]) {
     return resultArray;
 }
 
-const Accordion = ({items = [], onTitleChange}: {items?: AccordionItem[], onTitleChange?: any}) => {
+const Accordion = ({items = [], editMode, initialState = false, onTitleChange}: {items?: AccordionItem[], editMode?: boolean, initialState?: boolean, onTitleChange?: any}) => {
 
-    const stateArray = new Array(items.length).fill(false)
+    const stateArray = new Array(items.length).fill(initialState)
     const [state, setState] = useState(stateArray)
 
     useEffect(() => {
-        setState(createStateItemsArray(state, items))
+        setState(createStateItemsArray(state, items, initialState))
     }, [items])
 
     const toggleItem = (itemIndex: number) => {
@@ -53,12 +53,12 @@ const Accordion = ({items = [], onTitleChange}: {items?: AccordionItem[], onTitl
     }
 
     return (
-        <div className='flex flex-col gap-10'>
+        <div className='flex flex-col gap-16'>
             {items.map((item: AccordionItem, index: number) => (
-                <div key={item.id} className='border-b border-light-gray flex flex-col gap-2'>
+                <div key={item.id} className='border-b border-white flex flex-col gap-2'>
                     <div onClick={() => handleItemClick(index)} className={`cursor-pointer`}>
                         <div className='flex justify-between'>
-                            <div>
+                            <div className='w-full'>
                                 <span className={`text-3xl font-light cursor-pointer`}> 
                                     <TextInput 
                                         readOnly={!isOnEditingMode(index)}
@@ -78,7 +78,7 @@ const Accordion = ({items = [], onTitleChange}: {items?: AccordionItem[], onTitl
                     </div>
                     <div>
                         <Collapse isOpened={state[index]}>
-                            <div className='pb-6'>
+                            <div className='py-4'>
                                 {item.content}
                             </div>
                         </Collapse>

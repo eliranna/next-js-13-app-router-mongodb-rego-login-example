@@ -33,7 +33,7 @@ const CodeEditor: FC<CodeEditorProps> = ({ code, mode = 'light', readonly = fals
 
   // No need to use useEffect for setting the container
 
-  return <div ref={containerRef} style={{ height: '100%' }} />; // Set a fixed height or manage via props
+  return <div lang='en' dir='ltr' ref={containerRef} style={{ height: '100%' }} />; // Set a fixed height or manage via props
 };
 
 export default CodeEditor;

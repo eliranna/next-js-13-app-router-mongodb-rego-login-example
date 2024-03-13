@@ -5,13 +5,86 @@ import { useRouter } from 'next/navigation';
 import { BiAnalyse } from "react-icons/bi";
 import Button from "./base/Button";
 
+const MODULES: IModule[] = [
+    {
+      _id: "module1",
+      title: "Introduction to Python",
+      items: [
+        {
+          _id: "exercise1",
+          type: "codingChallenge",
+          title: "Hello, Python!",
+          description: "Write a program that prints 'Hello, World!' to the console."
+        },
+        {
+          _id: "exercise2",
+          type: "codingChallenge",
+          title: "Poetic Python",
+          description: "Create a script that outputs a three-line poem or haiku."
+        },
+        {
+          _id: "exercise3",
+          type: "codingChallenge",
+          title: "The Name Age Calculator",
+          description: "Write a program that takes a user's name and age, then calculates the year they were born."
+        },
+        {
+          _id: "exercise4",
+          type: "codingChallenge",
+          title: "Grocery List Maker",
+          description: "Develop a script that helps users make a list of items to buy from the grocery store."
+        },
+      ]
+    },
+    // Follow the same structure for the remaining modules...
+    {
+      _id: "module2",
+      title: "Control Structures",
+      items: [
+        {
+          _id: "exercise5",
+          type: "codingChallenge",
+          title: "Choose Your Own Adventure",
+          description: "Create a simple text-based adventure game that gives users choices."
+        },
+        {
+          _id: "exercise6",
+          type: "codingChallenge",
+          title: "Rock, Paper, Scissors, Python!",
+          description: "Write a Rock, Paper, Scissors game that the user plays against the computer."
+        },
+        {
+          _id: "exercise7",
+          type: "codingChallenge",
+          title: "The Grade Sorter",
+          description: "Develop a program that sorts a list of grades from highest to lowest."
+        },
+        {
+          _id: "exercise8",
+          type: "codingChallenge",
+          title: "Journey Through the Loop",
+          description: "Create a script that uses loops to print all the numbers from 1 to 100."
+        },
+      ]
+    },
+    // Add additional modules following the same pattern
+  ];
+
 type AccordionItem = {
     id: string,
     title?: string,
     content?: ReactNode
 }
 
-const ModuleItem = ({item, onEnter}: {item: IModuleItem, onEnter?: any}) => {
+type ModuleItemProps = {
+    item: IModuleItem, 
+    editMode?: boolean, 
+    onEnter?: any, 
+    onEdit?: any, 
+    onViewResults?: any
+}
+
+const ModuleItem = ({item, onEnter, onEdit, onViewResults, editMode}: ModuleItemProps) => {
 
     const timeLeftString = '5 days left'
 
@@ -27,37 +100,40 @@ const ModuleItem = ({item, onEnter}: {item: IModuleItem, onEnter?: any}) => {
     }
     
     return (
-        <div className='relative border border-light-gray p-6'>
+        <div className='relative box-shadow rounded-md p-6'>
             <div className='flex gap-4'>
                 <div className='flex flex-col gap-2'>
-                    <div>
-                        <span className='text-xs bg-black text-white px-2 py-[1.5px] rounded-full'>
-                            {getTypeCaption(item?.type) || 'Untitled'}
-                        </span>
-                    </div>
                     <div>
                         <span className='text-2xl'>
                             {item?.title || 'Untitled'}
                         </span>
                     </div>
                     <div className='flex gap-6'>
-                        <div className='text-sm '>
-                            23 Questions
-                        </div>
                         <div className='text-sm'>
                             {timeLeftString}
                         </div>
                     </div>
                 </div>
             </div>
-            <div className='absolute bottom-6 right-6'>
-                <Button underline caption="Open Challenge" onClick={onEnter}/>
+            <div className="absolute bottom-6 right-6 flex gap-4">
+                {editMode ? (
+                    <div className="flex gap-4">
+                        <div>
+                            <Button underline caption="Edit" onClick={onEdit}/>
+                        </div>
+                        <div>
+                            <Button underline caption="View Results" onClick={onViewResults}/>
+                        </div>
+                    </div>                    
+                ): (
+                    <Button underline caption="Start" onClick={onEnter}/>
+                )}
             </div>
         </div>
     )
 }
 
-const Module = ({courseId, module}: {courseId: string, module: IModule}) => {
+const Module = ({courseId, module, editMode}: {courseId: string, module: IModule, editMode?: boolean}) => {
 
     const router = useRouter();
 
@@ -65,43 +141,53 @@ const Module = ({courseId, module}: {courseId: string, module: IModule}) => {
         router.push(`/course/${courseId}/module/${moduleId}/item/${itemId}`)
     }
 
-    const handleCreateItem = () => {}
+    const handleCreateItem = () => {
+        router.push(`/builder`)
+    }
 
     return (
         <div>
             <div className='flex flex-col gap-6'>
-                <div className='flex gap-4'>
-                    <div>
-                        <Button caption='Create new' icon='/icons/plus.svg' onClick={handleCreateItem}/>
-                    </div>
-                </div>
-                <div>
+                <div className="flex flex-col gap-4">
                     {module.items && module.items.map((item: IModuleItem) => (
                         <div key={item._id}>
-                            <ModuleItem item={item} onEnter={() => handleOpenItem(courseId, module._id, item._id)}/>
+                            <ModuleItem 
+                                item={item} 
+                                editMode={editMode} 
+                                onEnter={() => handleOpenItem(courseId, module._id, item._id)}
+                                onEdit={() => handleOpenItem(courseId, module._id, item._id)}
+                                />
                         </div>
                     ))}
                 </div>
+                { editMode && (
+                    <div className='flex gap-4'>
+                        <div>
+                            <Button caption='Create new' icon='/icons/plus.svg' onClick={handleCreateItem}/>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     )
 }
 
-const CourseModules = ({ courseId, modules }: {courseId: string, modules: IModule[]}) => {
+const CourseModules = ({ courseId, modules, editMode }: {courseId: string, modules: IModule[], editMode?: boolean}) => {
 
     const [accordionItems, setAccordionItems] = useState<AccordionItem[]>([])
 
     useEffect(() => {
+        modules = MODULES
         const modulesItems: AccordionItem[] = modules?.map((module) => ({
             id: module._id,
             title: module.title,
-            content: <Module courseId={courseId} module={module}/>
+            content: <Module courseId={courseId} module={module} editMode={editMode}/>
         })) || []
         setAccordionItems(modulesItems)
     }, [modules])
 
     return (
-        <Accordion items={accordionItems}/>
+        <Accordion items={accordionItems} editMode={editMode} initialState={true}/>
     )
 }
 

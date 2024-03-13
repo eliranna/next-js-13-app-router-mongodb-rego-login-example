@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import PageHead from './PageHead';
 import Navbar from './Navbar';
+import ImageStrip from './base/ImageStrip';
 
 export default function RootLayout ({ title, children }: {title?: string, children: ReactNode}) {
 
@@ -12,13 +13,16 @@ export default function RootLayout ({ title, children }: {title?: string, childr
                     <div>
                         <Navbar/>
                     </div>
+                    <div className='w-full'>
+                        <ImageStrip/>
+                    </div>
                     <div>
                         {children}
                     </div>
                 </div>
                 <div className='bg-black h-[200px] w-full'>
                
-                </div>
+                </div>                
             </div>
         </div>
     )

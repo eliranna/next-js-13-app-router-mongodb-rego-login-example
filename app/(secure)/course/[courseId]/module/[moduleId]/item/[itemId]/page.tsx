@@ -10,6 +10,8 @@ import { IModuleItem } from '_services/useCourseService';
 import Quiz from '_components/Quiz';
 import { Page } from '_components/base/Page';
 import Grid from '_components/base/Grid';
+import { useUserService } from '_services';
+import RootLayout from '_components/RootLayout';
 
 const QuizPage = ({quiz}: {quiz: IModuleItem}) => {
     return (
@@ -25,6 +27,8 @@ const QuizPage = ({quiz}: {quiz: IModuleItem}) => {
 
 const ModuleItem = ({ params: { courseId, moduleId, itemId } }: any) => {
 
+    const editMode = true
+
     const router = useRouter();
     const { moduleItem, getById } = useModuleItemService();
 
@@ -32,10 +36,13 @@ const ModuleItem = ({ params: { courseId, moduleId, itemId } }: any) => {
         console.log(moduleItem)
         switch (moduleItem.type) {
             case "codingChallenge":
-                console.log(moduleItem)
-                return <Codespace task={moduleItem}/>
+                return <Codespace task={moduleItem} editMode={editMode}/>
             case 'quiz':
-                return <QuizPage quiz={moduleItem}/>
+                return (
+                    <RootLayout>
+                        <QuizPage quiz={moduleItem}/>
+                    </RootLayout>
+                )
             default:
                 break;
         }

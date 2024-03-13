@@ -36,6 +36,7 @@ function useCourseService(): ICourseService {
 export interface ICourse {
     _id: string,
     title: string,
+    coverImage: string,
     modules: IModule[]
 }
 
@@ -43,6 +44,15 @@ export interface IModule {
     _id: string,
     title: string,
     items?: IModuleItem[]
+}
+
+export type IModuleItem = {
+    _id: string;
+    type: IModuleItemType;
+    title: string,
+    description?: string,
+    initialCode?: string,
+    questions?: IQuestion[]
 }
 
 export type IInputType = 'text' | 'code' | 'math' | 'selection'
@@ -84,14 +94,7 @@ export interface ICodingChallange {
 
 export type IModuleItemType = 'quiz' | 'codingChallenge'
 
-export type IModuleItem = {
-    _id: string;
-    type: IModuleItemType;
-    title: string,
-    description?: string,
-    initialCode?: string,
-    questions?: IQuestion[]
-}
+
 
 interface ICourseStore {
     course?: ICourse,

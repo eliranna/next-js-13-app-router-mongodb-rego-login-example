@@ -6,8 +6,11 @@ import { useRouter } from 'next/navigation';
 import { useCourseService } from '_services';
 import Spinner from '_components/base/Spinner';
 import Course from '_components/Course';
+import RootLayout from '_components/RootLayout';
 
 const CoursePage = ({ params: { courseId } }: any) => {
+
+    const editMode = true
 
     const router = useRouter();
     const {course, getById} = useCourseService();
@@ -17,9 +20,11 @@ const CoursePage = ({ params: { courseId } }: any) => {
         getById(courseId)
     }, [router]);
     
-    return course
-        ? <Course course={course} />
-        : <Spinner />;
+    return (
+        <RootLayout>
+            {course ? <Course course={course} editMode={editMode}/> : <Spinner/>}
+        </RootLayout>
+    )
 
 }
 

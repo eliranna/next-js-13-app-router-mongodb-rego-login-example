@@ -9,11 +9,11 @@ import useCompile from '_helpers/client/useCompile'
 import useSelectionTooltip from '_helpers/client/useSelectionTooltip'
 import Instructions from './Instructions';
 import AssistantPanel from "./AssistantPanel";
-import { Suggestion } from "_types/assistant";
 import ExecutionPanel from "./ExecutionPanel";
 import ResizeHandle from "./base/ResizeHandle";
 import Panel from "./base/Panel";
 import { IModuleItem } from '_services';
+import StudentAssistant from './StudentAssistant';
 
 const python = {
   id: 71,
@@ -25,6 +25,7 @@ const python = {
 const Codespace = ({task}: {task?: IModuleItem}) => {
 
   const [code, setCode] = useState<string>("");
+  const [taskDescription, setTaskDescription] = useState<string>("");
   
   const [customInput, setCustomInput] = useState("")
   const [language, _ ] = useState(python)
@@ -36,7 +37,7 @@ const Codespace = ({task}: {task?: IModuleItem}) => {
 
   const ref = useRef<ImperativePanelHandle>(null);
 
-  const { append, messages } = useChat();
+  const { append, messages, isLoading } = useChat({api: '/api/gpt'});
 
   useEffect(() => {
     task && setCode(task.initialCode || '')
@@ -65,53 +66,53 @@ const Codespace = ({task}: {task?: IModuleItem}) => {
     })
   }
 
-  const handleSuggestionClick = async (suggestion: Suggestion) => {
+  const handleSuggestionClick = async (prompt: string) => {
     await append({
-      content: `${suggestion.prompt}: ${task?.description}`,
+      content: `${prompt}: ${task?.description}`,
       role: 'user'
     })    
   }
 
   return (
-    <div className='h-screen'>
-      {isTooltipVisible && (
-        <SelectionTooltip position={tooltipPosition} onSelectionQuery={handleSelectionQuery}/>
-      )}
-      <PanelGroup direction="horizontal">
-        <Panel defaultSize={30} minSize={20}>
-          <PanelGroup direction="vertical">
-            <Panel defaultSize={30} minSize={20} collapsible collapsedSize={5}>
-              <div className='h-full flex flex-col overflow-y-scroll'>
-                <Instructions task={task}/>
-              </div>                
+      <div className='h-screen'>
+        {isTooltipVisible && (
+          <SelectionTooltip position={tooltipPosition} onSelectionQuery={handleSelectionQuery}/>
+        )}
+        <PanelGroup direction="horizontal">
+          <Panel defaultSize={30} minSize={20}>
+            <PanelGroup direction="vertical">
+              <Panel defaultSize={30} minSize={20} collapsible collapsedSize={5}>
+                <div className='h-full flex flex-col overflow-y-scroll'>
+                  <Instructions description={taskDescription}/>
+                </div>                
+              </Panel>
+              <ResizeHandle direction="vertical"/>
+              <Panel defaultSize={30} minSize={0} ref={ref} style={{transition: 'all 0.3s ease'}}>
+                <AssistantPanel 
+                  messages={messages} 
+                  isOpen={assistantPanelIsOpen} 
+                  onToggle={() => toggleAssistantPanel(!assistantPanelIsOpen)}>
+                    <StudentAssistant onAssistanceRequest={handleSuggestionClick}/>
+                  </AssistantPanel>
+              </Panel>
+            </PanelGroup>
+          </Panel>
+          <ResizeHandle direction="horizontal"/>
+          <Panel minSize={30}>
+            <CodeEditor lineNumbers code={code} onChange={(code: string) => setCode(code)}/>
+          </Panel>
+          <ResizeHandle direction="horizontal"/>
+            <Panel defaultSize={30} minSize={20}>
+              <ExecutionPanel 
+                onExecute={handleExecute}
+                onCustomInputChange={setCustomInput} 
+                outputDetails={outputDetails} 
+                customInput={customInput} 
+                processing={processing} 
+                disableExecute={!code}/>
             </Panel>
-            <ResizeHandle direction="vertical"/>
-            <Panel defaultSize={30} minSize={0} ref={ref} style={{transition: 'all 0.3s ease'}}>
-              <AssistantPanel 
-                messages={messages} 
-                isOpen={assistantPanelIsOpen} 
-                onToggle={() => toggleAssistantPanel(!assistantPanelIsOpen)}
-                onSuggestionClick={handleSuggestionClick}
-                />
-            </Panel>
-          </PanelGroup>
-        </Panel>
-        <ResizeHandle direction="horizontal"/>
-        <Panel minSize={30}>
-          <CodeEditor lineNumbers code={code} onChange={(code: string) => setCode(code)}/>
-        </Panel>
-        <ResizeHandle direction="horizontal"/>
-        <Panel defaultSize={30} minSize={20}>
-          <ExecutionPanel 
-            onExecute={handleExecute}
-            onCustomInputChange={setCustomInput} 
-            outputDetails={outputDetails} 
-            customInput={customInput} 
-            processing={processing} 
-            disableExecute={!code}/>
-        </Panel>
-      </PanelGroup> 
-    </div>   
+        </PanelGroup> 
+      </div>  
   )
 }
 

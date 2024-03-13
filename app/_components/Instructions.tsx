@@ -1,22 +1,18 @@
 import Markdown from "./base/Markdown"
-import { ICodingChallange } from "_services/useModuleItemService"
+import Spinner from "./base/Spinner"
 
-const Instructions = ({task}: {task?: ICodingChallange}) => {
+const Instructions = ({title, description, processing}: {title?: string, description?: string, processing?: boolean}) => {
   return (
-    <div>
-      {task && (
-        <div className='flex flex-col gap-10'>
-          <div className='text-4xl font-light'>
-            {task.title}
-          </div>
-          <div className='text-md'>
-            <Markdown>
-              {task.description}
-            </Markdown>
-          </div>
+      <div className='flex flex-col p-10'>
+        <div className='text-4xl font-light'>
+          {title}
         </div>
-      )}
-    </div>
+        <div className='text-md'>
+          <Markdown>
+            {description}
+          </Markdown>
+        </div>
+      </div>
   )
 }
 

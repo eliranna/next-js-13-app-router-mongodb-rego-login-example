@@ -1,6 +1,6 @@
 import CustomInput from "./CustomInput"
 import OutputWindow from "./OutputWindow"
-import RunButton from "./RunButton"
+import RunButton from "./base/RunButton"
 
 interface ExecutionPanel {
     outputDetails: any,
@@ -23,7 +23,9 @@ const ExecutionPanel = ({outputDetails, customInput, onCustomInputChange, proces
                 </div>
             </div>
             <div>
-                <RunButton processing={processing} onClick={onExecute} disabled={disableExecute}/>
+                <RunButton icon={"/icons/run.svg"} processing={processing} onClick={onExecute} disabled={disableExecute}>
+                    Execute
+                </RunButton>
             </div>
         </div>
     )
