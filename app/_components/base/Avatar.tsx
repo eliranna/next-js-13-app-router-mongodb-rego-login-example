@@ -1,5 +1,5 @@
 import Image from "./Image"
 
-const Avatar = ({src}: {src: string}) =>  <Image className={'w-[25px] h-[25px] rounded-full'} src={src as string}/>
+const Avatar = ({src, className}: {src: string, className: string}) =>  <Image className={`${className} rounded-full`} src={src as string}/>
 
 export default Avatar
