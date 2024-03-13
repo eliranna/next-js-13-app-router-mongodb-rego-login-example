@@ -36,7 +36,7 @@ const ModuleItem = ({ params: { courseId, moduleId, itemId } }: any) => {
         console.log(moduleItem)
         switch (moduleItem.type) {
             case "codingChallenge":
-                return <Codespace task={moduleItem} editMode={editMode}/>
+                return <Codespace task={moduleItem}/>
             case 'quiz':
                 return (
                     <RootLayout>

@@ -15,6 +15,7 @@ const initialState = {
 const userStore = create<IUserStore>(() => initialState);
 
 function useUserService(): IUserService {
+
     const alertService = useAlertService();
     const fetch = useFetch();
     const router = useRouter();

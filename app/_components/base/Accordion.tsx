@@ -52,6 +52,10 @@ const Accordion = ({items = [], editMode, initialState = false, onTitleChange}: 
         toggleItem(index)
     }
 
+    const handlePlusClick = (clickEvent: any) => {
+        clickEvent.stopPropagation()
+    }
+
     return (
         <div className='flex flex-col gap-8'>
             {items.map((item: AccordionItem, index: number) => (
@@ -71,8 +75,13 @@ const Accordion = ({items = [], editMode, initialState = false, onTitleChange}: 
                                         onBlur={(value: string) => isOnEditingMode(index) && onTitleChange(index, value)}/>
                                 </span>
                             </div>
-                            <div className='flex flex-col justify-center'>
-                                <img src="/icons/down-arrow.svg" className={`w-[25px] ${state[index] ? 'rotate-180' : null} transition-all`}/>
+                            <div className='flex flex-row justify-end gap-6'>
+                                <div className={`flex flex-col justify-center opacity-0 ${state[index] && 'opacity-100'} transition-opacity`} onClick={handlePlusClick}>
+                                    <img src="/icons/plus.svg" className='w-[25px]'/>
+                                </div>
+                                <div className='flex flex-col justify-center'>
+                                    <img src="/icons/down-arrow.svg" className={`w-[25px] ${state[index] ? 'rotate-180' : null} transition-all`}/>
+                                </div>
                             </div>
                         </div>
                     </div>

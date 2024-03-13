@@ -1,15 +1,12 @@
-import { CourseSummary } from '_types/course';
 import Image from './base/Image';
-import Avatar from './base/Avatar';
+import { ICourseInfo } from '_services';
+import Button from './base/Button';
 
-const CourseCard = ({course}: {course: CourseSummary}) => {
-
-  const lecturerFullName = `${course?.lecturer?.firstName} ${course?.lecturer?.lastName}`
-
+const CourseCard = ({course, onViewCourse}: {course: ICourseInfo, onViewCourse: any}) => {
   return (
-    <div className='w-[350px] rounded-t-xl'>
-      <div className='w-full h-[443px]'>
-        <Image src={course.image} className='w-full h-full'/>
+    <div className='w-[350px] rounded-t-md'>
+      <div className='w-full h-[350px] rounded-t-md'>
+        <Image src={course.coverImage} className='w-full h-full rounded-t-md'/>
       </div>
       <div className='bg-apple-gray p-6 rounded-b-xl h-[200px]'>
         <div className='space-y-8 flex flex-col justify-between h-full'>
@@ -17,30 +14,29 @@ const CourseCard = ({course}: {course: CourseSummary}) => {
             <div className='text-2xl'>
               {course.title}
             </div>
-            <div className='flex gap-6'>
-              <div className='flex gap-4'>
-                  <div>
-                      <Avatar src={course?.lecturer?.avatar as string}/>
+            <div className='flex flex-col gap-8'>
+              <div className='flex gap-2 flex-col'>
+                <div>
+                  <div className='text-sm text-some-gray flex flex-col justify-center'>
+                    {course.location}
                   </div>
-                  <div>
-                      <span className='text-md'>
-                          {lecturerFullName}
-                      </span>
-                  </div>
+                </div>
+                <div>
+                  <div className='text-sm text-some-gray justify-self-end'>
+                    <span>
+                      {course.dateAndTime}
+                    </span>
+                  </div> 
+                </div>
               </div>
-              <div className='text-sm text-some-gray flex flex-col justify-center'>
-                {course.location}
-              </div>
-            </div>
-          </div>
-          <div className='space-y-1 text-sm text-some-gray justify-self-end'>
-            <div>
-              {course.date.display}
-            </div>
-          </div>
+              <div className='flex justify-end'>
+                <Button underline caption='View Course' onClick={onViewCourse}/>
+              </div> 
+            </div>       
         </div>
       </div>
     </div>
+  </div>
   )
 }
 

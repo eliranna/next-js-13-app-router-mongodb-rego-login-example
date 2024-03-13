@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
 import { db } from './db';
+import { ICourseInfo, IUser } from '_services';
 
 const Course = db.Course;
+const User = db.User;
 
 export const coursesRepo = {
     getSummary,
@@ -9,9 +11,24 @@ export const coursesRepo = {
     getModuleItem
 };
 
-async function getSummary(coursesIds: string[]) {
+async function getSummary(coursesIds: string[]): Promise<ICourseInfo[]> {
+
     const objectIds = coursesIds.map(id => new mongoose.Types.ObjectId(id));
-    return await Course.find({ _id: { $in: objectIds } });
+
+    try {
+      const courseInfo: ICourseInfo[] = await Course.find({ _id: { $in: objectIds } }, { 
+        _id: 1, 
+        title: 1, 
+        description: 1,
+        coverImage: 1,
+        location: 1, 
+        dateAndTime: 1
+      });
+      return courseInfo
+    } catch (e) {
+      throw e
+    }
+
 }
 
 async function getModuleItem(courseId: string, moduleId: string, itemId: string) {

@@ -195,13 +195,6 @@ const Module = ({courseId, module, editMode}: {courseId: string, module: IModule
                         </div>
                     ))}
                 </div>
-                { editMode && (
-                    <div className='flex gap-4'>
-                        <div>
-                            <Button caption='Create new' icon='/icons/plus.svg' onClick={handleCreateItem}/>
-                        </div>
-                    </div>
-                )}
             </div>
         </div>
     )

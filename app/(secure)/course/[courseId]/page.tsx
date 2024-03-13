@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { useCourseService } from '_services';
+import { useCourseService, useUserService } from '_services';
 import Spinner from '_components/base/Spinner';
 import Course from '_components/Course';
 import RootLayout from '_components/RootLayout';

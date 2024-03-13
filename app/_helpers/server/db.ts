@@ -79,6 +79,9 @@ function courseModel() {
         title: { type: String, required: true },
         description: { type: String, required: true },
         publicId: { type: String, required: true },
+        teacherId: { type: String, required: true },
+        location: { type: String, required: true },
+        dateAndTime: { type: String, required: true },
         modules: [moduleSchema]
     }, {
         timestamps: true

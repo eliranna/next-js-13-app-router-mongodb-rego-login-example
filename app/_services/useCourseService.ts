@@ -1,14 +1,22 @@
 import { useFetch } from "_helpers/client";
 import { create } from "zustand";
 
-export { useCourseService };
-
 const initialState = {
     course: undefined,
     courses: undefined
 };
 
+interface ICourseStore {
+    course?: ICourse,
+    courses?: ICourseInfo[],
+}
+
 const courseStore = create<ICourseStore>(() => initialState);
+
+interface ICourseService extends ICourseStore {
+    getById: (id: string) => Promise<void>,
+    getUserCoursesSummary: () => Promise<void>,
+}
 
 function useCourseService(): ICourseService {
 
@@ -27,9 +35,24 @@ function useCourseService(): ICourseService {
                 //alertService.error(error);
             }
         },
-        getAll: async () => {
+        getUserCoursesSummary: async () => {
             courseStore.setState({ courses: await fetch.get('/api/courses') });
         },
+    }
+}
+
+export { useCourseService };
+
+export interface ICourseInfo {
+    _id: string,
+    title: string,
+    coverImage: string,
+    location: string,
+    dateAndTime: string,
+    teacher?: {
+        firstName: string,
+        lastName: string,
+        avatar: string
     }
 }
 
@@ -96,12 +119,5 @@ export type IModuleItemType = 'quiz' | 'codingChallenge'
 
 
 
-interface ICourseStore {
-    course?: ICourse,
-    courses?: ICourse[],
-}
 
-interface ICourseService extends ICourseStore {
-    getById: (id: string) => Promise<void>,
-    getAll: () => Promise<void>,
-}
+
