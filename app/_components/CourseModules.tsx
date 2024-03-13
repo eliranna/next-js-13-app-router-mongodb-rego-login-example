@@ -67,6 +67,36 @@ const MODULES: IModule[] = [
         },
       ]
     },
+    {
+        _id: "module3",
+        title: "Functions and Modules",
+        items: [
+          {
+            _id: "exercise9",
+            type: "codingChallenge",
+            title: "Mad Libs Generator",
+            description: "Build a Mad Libs game where users input words to generate a funny story."
+          },
+          {
+            _id: "exercise10",
+            type: "codingChallenge",
+            title: "The Temperature Converter",
+            description: "Write a function that converts temperatures between Fahrenheit and Celsius."
+          },
+          {
+            _id: "exercise11",
+            type: "codingChallenge",
+            title: "Fitness Fun",
+            description: "Develop a module that calculates various fitness metrics, like BMI."
+          },
+          {
+            _id: "exercise12",
+            type: "codingChallenge",
+            title: "Email Slicer",
+            description: "Create a function that extracts the username and domain name from an email address."
+          },
+        ]
+      }
     // Add additional modules following the same pattern
   ];
 
@@ -145,6 +175,10 @@ const Module = ({courseId, module, editMode}: {courseId: string, module: IModule
         router.push(`/builder`)
     }
 
+    const handleViewResults = (id: string) => {
+        router.push(`/item/${id}`)
+    }
+
     return (
         <div>
             <div className='flex flex-col gap-6'>
@@ -156,6 +190,7 @@ const Module = ({courseId, module, editMode}: {courseId: string, module: IModule
                                 editMode={editMode} 
                                 onEnter={() => handleOpenItem(courseId, module._id, item._id)}
                                 onEdit={() => handleOpenItem(courseId, module._id, item._id)}
+                                onViewResults={() => handleViewResults(item._id)}
                                 />
                         </div>
                     ))}

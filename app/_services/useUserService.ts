@@ -103,13 +103,21 @@ function useUserService(): IUserService {
 
 // interfaces
 
-interface IUser {
+export interface IUserInfo {
+    id: string,
+    firstName: string,
+    lastName: string,
+    photo: string
+}
+
+export interface IUser {
     id: string,
     firstName: string,
     lastName: string,
     username: string,
     password: string,
-    isDeleting?: boolean
+    isDeleting?: boolean,
+    photo: string
 }
 
 interface IUserStore {
