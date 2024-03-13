@@ -1,6 +1,7 @@
 import { IResultInfo, Status } from "_services/useResultsService"
 import Avatar from "./base/Avatar"
 import Button from "./base/Button"
+import Chip from "./base/Chip"
 
 const ProgressIndicator = ({status}: {status: Status}) => {
     const getIcon = (status: Status) => {
@@ -15,7 +16,7 @@ const ProgressIndicator = ({status}: {status: Status}) => {
     }
     return (
         <div>
-            <img src={getIcon(status)} className="w-[45px]"/>
+            <img src={getIcon(status)} className="w-[30px]"/>
         </div>
     )
 }
@@ -24,17 +25,15 @@ const GradeIndicator = ({grade}: {grade: number}) => {
     return (
         <div className="h-full flex flex-col justify-center">
             <div className="flex flex-col justify-center">
-                <span className="text-lg text-dark-gray font-semibold">
-                    {grade}
-                </span>
+                <Chip id={'grade'} caption={`${grade}`} className="text-lg font-bold text-dark-gray"/>
             </div>
         </div>
     )
 }
 
-const Result = ({result}: {result: IResultInfo}) => {
+const Result = ({result, onViewResult}: {result: IResultInfo, onViewResult: any}) => {
     return (
-        <div className="w-full rounded-full p-2 border border-gray">
+        <div className="w-full rounded-full p-2 border border-gray cursor-pointer px-4" onClick={onViewResult}>
             <div className="flex flex-row justify-between">
                 <div className="flex gap-4">
                     <div className="h-full flex flex-col justify-center">

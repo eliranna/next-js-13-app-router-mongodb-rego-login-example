@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation';
 import Result from "_components/Result"
 import RootLayout from "_components/RootLayout"
 import Grid from "_components/base/Grid"
@@ -16,6 +17,8 @@ type IStatus = {
 
 const ItemPage = ({ params: { itemId } }: any) => {
 
+    const router = useRouter();
+
     // Here we need to fetch fromA nswares table all records with itemId===itemId
     // then we show a list of all students who started the item.
     // click on list reocrd would lead to item solution (but for this we need courseId and moduleId...)
@@ -31,6 +34,8 @@ const ItemPage = ({ params: { itemId } }: any) => {
     const results: IResultInfo[] = [
         {
             id: 'asdasas',
+            courseId: 'sdsds',
+            moduleId: 'sssds',
             user: {
                 id: '232323',
                 firstName: 'Eliran',
@@ -41,6 +46,8 @@ const ItemPage = ({ params: { itemId } }: any) => {
         },
         {
             id: 'cxczz',
+            courseId: 'sdsds',
+            moduleId: 'sssds',
             user: {
                 id: '2323232',
                 firstName: 'Noa',
@@ -52,6 +59,8 @@ const ItemPage = ({ params: { itemId } }: any) => {
         },
         {
             id: 'cxczz',
+            courseId: 'sdsds',
+            moduleId: 'sssds',
             user: {
                 id: '2323232',
                 firstName: 'Noa',
@@ -62,6 +71,8 @@ const ItemPage = ({ params: { itemId } }: any) => {
         },
         {
             id: 'cxczz',
+            courseId: 'sdsds',
+            moduleId: 'sssds',
             user: {
                 id: '2323232',
                 firstName: 'Noa',
@@ -72,6 +83,8 @@ const ItemPage = ({ params: { itemId } }: any) => {
         },
         {
             id: 'cxczz',
+            courseId: 'sdsds',
+            moduleId: 'sssds',
             user: {
                 id: '2323232',
                 firstName: 'Noa',
@@ -82,6 +95,8 @@ const ItemPage = ({ params: { itemId } }: any) => {
         },
         {
             id: 'cxczz',
+            courseId: 'sdsds',
+            moduleId: 'sssds',
             user: {
                 id: '2323232',
                 firstName: 'Noa',
@@ -111,6 +126,10 @@ const ItemPage = ({ params: { itemId } }: any) => {
             icon: '/icons/check.svg'
         },
     ]
+
+    const handleViewResult = (result: IResultInfo) => {
+        router.push(`/course/${result.courseId}/module/${result.moduleId}/item/${result.id}`)
+    }
 
     const StatusInfo = ({icon, count, caption}: {icon: string, count: number, caption: string}) => (
         <div className="flex gap-4">
@@ -178,7 +197,7 @@ const ItemPage = ({ params: { itemId } }: any) => {
                                 {results.map((result: IResultInfo) => {
                                     return (
                                         <div key={result.id} className="w-full">
-                                            <Result result={result}/>
+                                            <Result result={result} onViewResult={() => handleViewResult(result)}/>
                                         </div>
                                     )
                                 })} 

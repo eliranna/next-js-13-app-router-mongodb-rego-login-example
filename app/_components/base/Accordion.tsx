@@ -53,7 +53,7 @@ const Accordion = ({items = [], editMode, initialState = false, onTitleChange}: 
     }
 
     return (
-        <div className='flex flex-col gap-16'>
+        <div className='flex flex-col gap-8'>
             {items.map((item: AccordionItem, index: number) => (
                 <div key={item.id} className='border-b border-white flex flex-col gap-2'>
                     <div onClick={() => handleItemClick(index)} className={`cursor-pointer`}>
