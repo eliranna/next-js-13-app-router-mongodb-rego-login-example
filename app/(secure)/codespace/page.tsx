@@ -1,8 +1,9 @@
-import Navbar from "_components/Navbar"
 import Codespace from "_components/Codespace"
-import { Task } from "_types/exercise"
+import { IModuleItem } from "_services"
 
-const task: Task = {
+const task: IModuleItem = {
+    _id: 'some-id',
+    type: 'codingChallenge',
     title: 'Build a Space Robot',
     description: "Write a Python function named that determines if a string has all unique characters. For the purpose of this question, you can assume the string only contains lowercase letters from the English alphabet. Your function should return if all characters in the string are unique, and otherwise.",
     initialCode: `class Calculator:

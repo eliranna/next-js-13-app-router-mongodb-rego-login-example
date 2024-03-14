@@ -115,10 +115,10 @@ const InputTypeSelector = ({inputType = defaultInputType, onChange}: {inputType:
                     </div>
                 </div>
                 <div className="flex gap-2">
-                    <Chip caption="Options" icon="/icons/list.svg" selected={inputType === 'selection'} onClick={() => onChange('selection')}/>
-                    <Chip caption="Free Text" icon="/icons/text.svg" selected={inputType === 'text'} onClick={() => onChange('text')}/>
-                    <Chip caption="Code Snippet" icon="/icons/code.svg" selected={inputType === 'code'} onClick={() => onChange('code')}/>
-                    <Chip caption="Formula" icon="/icons/math.svg" selected={inputType === 'math'} onClick={() => onChange('math')}/>
+                    <Chip id="selection" caption="Options" icon="/icons/list.svg" selected={inputType === 'selection'} onClick={() => onChange('selection')}/>
+                    <Chip id="text" caption="Free Text" icon="/icons/text.svg" selected={inputType === 'text'} onClick={() => onChange('text')}/>
+                    <Chip id="code" caption="Code Snippet" icon="/icons/code.svg" selected={inputType === 'code'} onClick={() => onChange('code')}/>
+                    <Chip id="math" caption="Formula" icon="/icons/math.svg" selected={inputType === 'math'} onClick={() => onChange('math')}/>
                 </div>
             </div>
         </div>

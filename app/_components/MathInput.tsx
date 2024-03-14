@@ -17,6 +17,7 @@ const MathInput = ({formula, withRemove, onChange, onRemove}: {formula?: string,
 
     // Customize the mathfield when it is mounted
     const mf = useRef()
+    /*
     useEffect(() => {
         if (mf.current) {
             // Read more about customizing the mathfield: https://cortexjs.io/mathlive/guides/customizing/
@@ -46,6 +47,7 @@ const MathInput = ({formula, withRemove, onChange, onRemove}: {formula?: string,
             }, 100)
         }
     }, [])
+    */
 
     useEffect(() => {
         formula && setValue(formula)
@@ -53,7 +55,7 @@ const MathInput = ({formula, withRemove, onChange, onRemove}: {formula?: string,
   
 
     const handleFocus = () => {
-        mf.current.focus();
+       // mf.current.focus();
     };
 
     return (
@@ -65,9 +67,11 @@ const MathInput = ({formula, withRemove, onChange, onRemove}: {formula?: string,
                         <TrashButton onClick={onRemove}/>
                     </div>
                 )}
+                { /*
                 <math-field ref={mf} onInput={(evt) => {setValue(evt.target.value); onChange && onChange(evt.target.value)}} placeholder="Example: 2x + 5">
                     {value}
                 </math-field>
+                */}
             </div>
         </>
     )
