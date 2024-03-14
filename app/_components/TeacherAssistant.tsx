@@ -74,9 +74,12 @@ const TeacherAssistant = ({topics, themes, levels, processing, onGenerateQuestio
         <div className="flex flex-col gap-10">
 
           <div>
-            <div>
-              <RunButton processing={processing} onClick={handleGenerateQuestion} icon="/icons/light.svg">
+            <div className="flex gap-4 justify-between">
+              <RunButton secondary processing={processing} onClick={handleGenerateQuestion} icon="/icons/light.svg">
                 Generate Question
+              </RunButton>
+              <RunButton icon="/icons/check-black.svg">
+                Publish
               </RunButton>
             </div>
           </div>          

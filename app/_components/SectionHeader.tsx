@@ -14,7 +14,7 @@ const SectionHeader = ({topic, title, description, editMode = false, custom}: {t
                 )}  
                 <div>
                     <div className="text-5xl leading-snug font-light">
-                        {editMode ? <TextInput eng placeholder="Name" className="text-5"/> : title}
+                        {editMode ? <TextInput eng placeholder="Title" className="text-5"/> : title}
                     </div>
                 </div>              
             </div>

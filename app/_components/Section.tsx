@@ -12,7 +12,7 @@ export type SectionHeader = {
     custom?: ReactNode
 }
 
-const Section = ({header, children}: {header: SectionHeader, children?: ReactNode}) => {
+const Section = ({header, children, nerrow}: {header: SectionHeader, nerrow?: boolean, children?: ReactNode}) => {
     return (
         <RootLayout>
             <Page>
@@ -20,7 +20,7 @@ const Section = ({header, children}: {header: SectionHeader, children?: ReactNod
                     <div className="lg:col-start-1 lg:col-span-4">
                         <SectionHeader {...header}/>
                     </div>
-                    <div className="lg:col-start-6 lg:col-span-6 flex gap-6">
+                    <div className={`lg:col-start-6 ${nerrow ? 'lg:col-span-5' : 'lg:col-span-6'} flex gap-6`}>
                         <div className="flex flex-col w-full gap-10">
                             {children}
                         </div>

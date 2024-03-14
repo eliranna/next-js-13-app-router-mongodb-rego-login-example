@@ -127,12 +127,6 @@ const composePrompt = (level: string, themes: string[], topics: string[]) => {
     return `Generate a ${level} level Python exercise for high-school students that checkes thier knowladge in the subjects of ${topics.join(', ')} in the themes of ${themes.join('and ')}. Provide examples for inputs and outputs. write input and output examples inside code blocks. DO NOT provide the solution for the question.`
 }
 
-/*
-const composeTranslationPrompt = (content: string) => {
-    return `Translate the following Python exercise to Hebrew. Avoid translating code or inpput/output samples, or anything that is inside a code block: ${content}`
-}
-*/
-
 const QBuilder = () => {
 
     const { append, messages, isLoading } = useChat({api: '/api/gpt'});
@@ -148,22 +142,6 @@ const QBuilder = () => {
             role: 'user'
         })    
     } 
-
-    /*
-    const { append: appendToClude, messages: cludeMessages, isLoading: cludeIsLoading } = useChat({api: '/api/clude'});
-
-    useEffect(() => {
-        englishQuestion && appendToClude({
-            content: composeTranslationPrompt(englishQuestion),
-            role: 'user'
-        })
-    }, [englishQuestion])
-
-    useEffect(() => {
-        cludeMessages && cludeMessages.length > 0 && setQuestionBody(cludeMessages[cludeMessages.length-1].content)
-    }, [cludeMessages])
-
-    */   
     
     return (
       <Section header={{

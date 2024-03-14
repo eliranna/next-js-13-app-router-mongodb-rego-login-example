@@ -106,7 +106,7 @@ const ItemPage = ({ params: { itemId } }: any) => {
     }
 
     return (
-        <Section header={{
+        <Section nerrow header={{
             topic: 'Challenge Results',
             title: item.title,
             description: item.description
@@ -115,7 +115,7 @@ const ItemPage = ({ params: { itemId } }: any) => {
                 <div>
                     <TextInput eng placeholder="Search student" className="text-2xl"/>
                 </div>
-                <div className="flex flex-row gap-6 w-full flex-wrap">
+                <div className="flex flex-row gap-4 w-full flex-wrap">
                     {results.map((result: IResultInfo) => {
                         return (
                             <div key={result.id} className="w-full">

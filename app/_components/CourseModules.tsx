@@ -116,8 +116,6 @@ type ModuleItemProps = {
 
 const ModuleItem = ({item, onEnter, onEdit, onViewResults, editMode}: ModuleItemProps) => {
 
-    const timeLeftString = '5 days left'
-
     const getTypeCaption = (type: IModuleItemType) => {
         switch (type) {
             case 'codingChallenge':
@@ -134,13 +132,13 @@ const ModuleItem = ({item, onEnter, onEdit, onViewResults, editMode}: ModuleItem
             <div className='flex gap-4'>
                 <div className='flex flex-col gap-2'>
                     <div>
-                        <span className='text-2xl'>
+                        <span className='text-xl font-medium'>
                             {item?.title || 'Untitled'}
                         </span>
                     </div>
                     <div className='flex gap-6'>
                         <div className='text-sm'>
-                            {timeLeftString}
+                            {'5 days left'}
                         </div>
                     </div>
                 </div>
