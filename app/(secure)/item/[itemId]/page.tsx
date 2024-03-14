@@ -2,48 +2,10 @@
 
 import { useRouter } from 'next/navigation';
 import Result from "_components/Result"
-import RootLayout from "_components/RootLayout"
-import Grid from "_components/base/Grid"
-import { Page } from "_components/base/Page"
 import TextInput from "_components/base/TextInput"
 import { IModuleItem } from "_services"
 import { IResultInfo, Status } from "_services/useResultsService"
 import Section from '_components/Section';
-
-export const ChallengeHeader = ({item, statusSummary}: {item: IModuleItem, statusSummary: IStatus[]}) => (
-    <div className="flex flex-col gap-10">
-        <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
-                <div>
-                    <span className="uppercase text-dark-gray font-semibold text-sm tracking-wide">
-                        Challenge results
-                    </span>
-                </div>
-                <div>
-                    <span className='text-5xl leading-snug font-light'>
-                        {item.title}
-                    </span>                                
-                </div>
-            </div>
-            <div>
-                <span className='text-lg leading-relaxed'>
-                    {item.description}
-                </span>
-            </div>
-        </div>
-        <div>
-            <div className="flex flex-col gap-3">
-                
-            </div>
-        </div>
-    </div>
-)
-
-type IStatus = {
-    caption: string,
-    count: number,
-    icon: string
-}
 
 const ItemPage = ({ params: { itemId } }: any) => {
 
@@ -139,29 +101,9 @@ const ItemPage = ({ params: { itemId } }: any) => {
 
     ]
 
-    const statusSummary: IStatus[] = [
-        {
-            caption: 'Started',
-            count: results.filter(result => result.status === 'notStarted').length,
-            icon: '/icons/gray-circle.svg'
-        },
-        {
-            caption: 'In Progress',
-            count: results.filter(result => result.status === 'inProgress').length,
-            icon: '/icons/dots.svg'
-        },
-        {
-            caption: 'Submitted',
-            count: results.filter(result => result.status === 'submitted').length,
-            icon: '/icons/check.svg'
-        },
-    ]
-
     const handleViewResult = (result: IResultInfo) => {
         router.push(`/course/${result.courseId}/module/${result.moduleId}/item/${result.id}`)
     }
-
-
 
     return (
         <Section header={{

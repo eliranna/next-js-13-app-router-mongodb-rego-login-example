@@ -9,7 +9,7 @@ export default function RootLayout ({ title, hideFooter, children }: {title?: st
         <div>
             <PageHead title={title}/>
             <div>
-                <div className='min-h-screen'>
+                <div className='min-h-screen mb-20'>
                     <div>
                         <Navbar/>
                     </div>
