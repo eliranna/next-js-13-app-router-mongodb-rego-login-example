@@ -32,8 +32,12 @@ const ModuleItem = ({ params: { courseId, moduleId, itemId } }: any) => {
     const router = useRouter();
     const { moduleItem, getById } = useModuleItemService();
 
+    useEffect(() => {
+        if (!courseId && moduleId && itemId) return;
+        getById(courseId, moduleId, itemId)
+    }, [router]);
+
     const getModuleItem = (moduleItem: IModuleItem) => {
-        console.log(moduleItem)
         switch (moduleItem.type) {
             case "codingChallenge":
                 return <Codespace task={moduleItem}/>
@@ -47,11 +51,6 @@ const ModuleItem = ({ params: { courseId, moduleId, itemId } }: any) => {
                 break;
         }
     }
-
-    useEffect(() => {
-        if (!courseId && moduleId && itemId) return;
-        getById(courseId, moduleId, itemId)
-    }, [router]);
 
     return moduleItem ? getModuleItem(moduleItem) : <Spinner/>
 }

@@ -33,7 +33,7 @@ const GradeIndicator = ({grade}: {grade: number}) => {
 
 const Result = ({result, onViewResult}: {result: IResultInfo, onViewResult: any}) => {
     return (
-        <div className="w-full rounded-full p-2 border border-gray cursor-pointer px-4" onClick={onViewResult}>
+        <div className="w-full rounded-md p-4 border border-gray cursor-pointer px-4" onClick={onViewResult}>
             <div className="flex flex-row justify-between">
                 <div className="flex gap-4">
                     <div className="h-full flex flex-col justify-center">
@@ -59,7 +59,7 @@ const Result = ({result, onViewResult}: {result: IResultInfo, onViewResult: any}
                         </div>
                     )}
                     <div>
-                        <ProgressIndicator status={result.status}/>
+                        {result.status === 'submitted' && <ProgressIndicator status={result.status}/>}
                     </div>
                 </div>
             </div>

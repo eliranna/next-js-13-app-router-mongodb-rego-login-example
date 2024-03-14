@@ -7,11 +7,11 @@ import Button from "./base/Button";
 
 const MODULES: IModule[] = [
     {
-      _id: "module1",
+      _id: "65ef6b8a2a17b1fca9535096",
       title: "Introduction to Python",
       items: [
         {
-          _id: "exercise1",
+          _id: "65ef6b382a17b1fca9535094",
           type: "codingChallenge",
           title: "Hello, Python!",
           description: "Write a program that prints 'Hello, World!' to the console."
@@ -44,7 +44,7 @@ const MODULES: IModule[] = [
         {
           _id: "exercise5",
           type: "codingChallenge",
-          title: "Choose Your Own Adventure",
+          title: "Build a Space Robot",
           description: "Create a simple text-based adventure game that gives users choices."
         },
         {
@@ -130,7 +130,7 @@ const ModuleItem = ({item, onEnter, onEdit, onViewResults, editMode}: ModuleItem
     }
     
     return (
-        <div className='relative box-shadow rounded-md p-6'>
+        <div className='relative box-shadow rounded-md p-6 group cursor-pointer' onClick={onEnter}>
             <div className='flex gap-4'>
                 <div className='flex flex-col gap-2'>
                     <div>
@@ -145,19 +145,8 @@ const ModuleItem = ({item, onEnter, onEdit, onViewResults, editMode}: ModuleItem
                     </div>
                 </div>
             </div>
-            <div className="absolute bottom-6 right-6 flex gap-4">
-                {editMode ? (
-                    <div className="flex gap-4">
-                        <div>
-                            <Button underline caption="Edit" onClick={onEdit}/>
-                        </div>
-                        <div>
-                            <Button underline caption="View Results" onClick={onViewResults}/>
-                        </div>
-                    </div>                    
-                ): (
-                    <Button underline caption="Start" onClick={onEnter}/>
-                )}
+            <div className="absolute bottom-6 right-6 flex gap-4 opacity-0 group-hover:opacity-100">
+                {!editMode && <Button underline caption="Start" onClick={onEnter}/>}
             </div>
         </div>
     )

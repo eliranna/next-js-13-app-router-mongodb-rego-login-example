@@ -28,7 +28,7 @@ const ItemPage = ({ params: { itemId } }: any) => {
         _id: 'asdasdaa',
         type: 'codingChallenge',
         title: 'Rock, Paper, Scissors, Python!',
-        description: "Write a Rock, Paper, Scissors game that the user plays against the computer."
+        description: "Write a Rock, Paper, Scissors game that the user plays against the computer. Write a Rock, Paper, Scissors game that the user plays against the computer."
     }
 
     const results: IResultInfo[] = [
@@ -157,25 +157,25 @@ const ItemPage = ({ params: { itemId } }: any) => {
             <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-2">
                     <div>
-                        <span className="uppercase text-dark-gray font-semibold">
+                        <span className="uppercase text-dark-gray font-semibold text-sm tracking-wide">
                             Challenge results
                         </span>
                     </div>
                     <div>
-                        <span className='text-4xl'>
+                        <span className='text-5xl leading-snug font-light'>
                             {item.title}
                         </span>                                
                     </div>
                 </div>
                 <div>
-                    <span>
+                    <span className='text-lg leading-relaxed'>
                         {item.description}
                     </span>
                 </div>
             </div>
             <div>
                 <div className="flex flex-col gap-3">
-                    <StatusBar statusSummary={statusSummary}/>
+                    
                 </div>
             </div>
         </div>
@@ -185,10 +185,10 @@ const ItemPage = ({ params: { itemId } }: any) => {
         <RootLayout>
             <Page>
                 <Grid className='mt-20'>
-                    <div className="lg:col-start-1 lg:col-span-3">
+                    <div className="lg:col-start-1 lg:col-span-4">
                         <ChallengeHeader item={item} statusSummary={statusSummary}/>
                     </div>
-                    <div className="lg:col-start-5 lg:col-span-6 flex gap-6">
+                    <div className="lg:col-start-6 lg:col-span-5 flex gap-6">
                         <div className="flex flex-col w-full gap-10">
                             <div>
                                 <TextInput eng placeholder="Search student" className="text-2xl"/>

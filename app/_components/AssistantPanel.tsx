@@ -34,7 +34,7 @@ const AssistantPanel = ({messages, isOpen, onToggle, children}: {messages: Messa
                 {children}
             </div>
             <AutoScrollDiv>
-                <Assistant messages={messages}/>
+                <Assistant messages={messages.filter(message => message.role === 'assistant')}/>
             </AutoScrollDiv>
       </div>
     )

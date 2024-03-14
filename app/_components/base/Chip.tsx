@@ -5,7 +5,8 @@ export type ChipItem = {
     icon?: string, 
     selected?: boolean, 
     onClick?: any,
-    className?: string
+    className?: string,
+    info?: string
 }
 
 const Chip = ({caption, icon, selected, className, onClick}: ChipItem) => {

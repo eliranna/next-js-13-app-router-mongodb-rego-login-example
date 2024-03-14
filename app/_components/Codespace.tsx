@@ -25,7 +25,6 @@ const python = {
 const Codespace = ({task}: {task?: IModuleItem}) => {
 
   const [code, setCode] = useState<string>("");
-  const [taskDescription, setTaskDescription] = useState<string>("");
   
   const [customInput, setCustomInput] = useState("")
   const [language, _ ] = useState(python)
@@ -79,11 +78,11 @@ const Codespace = ({task}: {task?: IModuleItem}) => {
           <SelectionTooltip position={tooltipPosition} onSelectionQuery={handleSelectionQuery}/>
         )}
         <PanelGroup direction="horizontal">
-          <Panel defaultSize={30} minSize={20}>
+          <Panel defaultSize={35} minSize={20}>
             <PanelGroup direction="vertical">
               <Panel defaultSize={30} minSize={20} collapsible collapsedSize={5}>
                 <div className='h-full flex flex-col overflow-y-scroll'>
-                  <Instructions description={taskDescription}/>
+                  <Instructions description={task?.description}/>
                 </div>                
               </Panel>
               <ResizeHandle direction="vertical"/>
@@ -102,7 +101,7 @@ const Codespace = ({task}: {task?: IModuleItem}) => {
             <CodeEditor lineNumbers code={code} onChange={(code: string) => setCode(code)}/>
           </Panel>
           <ResizeHandle direction="horizontal"/>
-            <Panel defaultSize={30} minSize={20}>
+            <Panel defaultSize={25} minSize={20}>
               <ExecutionPanel 
                 onExecute={handleExecute}
                 onCustomInputChange={setCustomInput} 

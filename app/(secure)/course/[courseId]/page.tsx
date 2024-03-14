@@ -10,7 +10,7 @@ import RootLayout from '_components/RootLayout';
 
 const CoursePage = ({ params: { courseId } }: any) => {
 
-    const editMode = true
+    const editMode = false
 
     const router = useRouter();
     const {course, getById} = useCourseService();
