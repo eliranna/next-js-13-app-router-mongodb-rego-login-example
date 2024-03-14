@@ -102,7 +102,7 @@ const ItemPage = ({ params: { itemId } }: any) => {
     ]
 
     const handleViewResult = (result: IResultInfo) => {
-        router.push(`/course/${result.courseId}/module/${result.moduleId}/item/${result.id}`)
+        router.push(`/course/${result.courseId}/module/${result.moduleId}/item/${result.id}?teacher=true`)
     }
 
     return (

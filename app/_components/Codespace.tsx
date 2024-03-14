@@ -22,7 +22,41 @@ const python = {
   value: "python",
 }
 
-const Codespace = ({task}: {task?: IModuleItem}) => {
+type assistantSugggestions = 
+  'Explain the question' 
+| 'Give me a hint' 
+| 'How to start?' 
+| `Estimate student's progress`
+| `Where does the student shows difficulties?`
+
+const studentAssistantSugggestions: assistantSugggestions[] = ['Explain the question', 'Give me a hint', 'How to start?']
+const teacherAssistantSugggestions: assistantSugggestions[] = ["Estimate student's progress", "Where does the student shows difficulties?"]
+
+const computePrompt = (caption: assistantSugggestions, task: IModuleItem, code: string) => {
+
+  switch (caption) {
+
+    case 'Explain the question':
+      return `Explain the question in simple terms without solving it: ${task.description}`
+
+    case 'Give me a hint':
+      return `Give me a hint for solving the question without solving it: ${task.description}`   
+
+    case 'How to start?':
+      return `Show me how to start the solution of the following question: ${task.description}`  
+      
+    case `Estimate student's progress`:
+      return `Given the following python programming question: ${task.description}. The student has replayed with the following code: ${code}. is the given code is a good solution? if not, explain what is missing and how much it is far from solution. Grade this solution between 0 to 100 and tell us if the student is in the right direction or that it is not the right way.` 
+      
+    case `Where does the student shows difficulties?`:
+      return `Given the following python programming question: ${task.description}. The student has replayed with the following code: ${code}. According to this, list the main topics the student might be straggeling with and suggest ways to help him. However, if you think that that student shows no difficulties in the topic of the question, then tell this and offer some ways to take the student to the next level.`       
+
+    default:
+      return null
+  }
+}
+
+const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) => {
 
   const [code, setCode] = useState<string>("");
   
@@ -65,9 +99,12 @@ const Codespace = ({task}: {task?: IModuleItem}) => {
     })
   }
 
-  const handleSuggestionClick = async (prompt: string) => {
-    await append({
-      content: `${prompt}: ${task?.description}`,
+  const handleSuggestionClick = async (caption: assistantSugggestions) => {
+    if (!task) {return}
+    const prompt: string | null = computePrompt(caption, task, code)
+    console.log(prompt)
+    prompt && await append({
+      content: prompt,
       role: 'user'
     })    
   }
@@ -91,7 +128,9 @@ const Codespace = ({task}: {task?: IModuleItem}) => {
                   messages={messages} 
                   isOpen={assistantPanelIsOpen} 
                   onToggle={() => toggleAssistantPanel(!assistantPanelIsOpen)}>
-                    <StudentAssistant onAssistanceRequest={handleSuggestionClick}/>
+                    <StudentAssistant 
+                      suggestions={isTeacher ? teacherAssistantSugggestions : studentAssistantSugggestions} 
+                      onAssistanceRequest={handleSuggestionClick}/>
                   </AssistantPanel>
               </Panel>
             </PanelGroup>

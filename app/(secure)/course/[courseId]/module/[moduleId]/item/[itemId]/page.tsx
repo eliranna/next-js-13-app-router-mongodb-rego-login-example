@@ -11,6 +11,8 @@ import Quiz from '_components/Quiz';
 import { Page } from '_components/base/Page';
 import Grid from '_components/base/Grid';
 import RootLayout from '_components/RootLayout';
+import { useSearchParams } from 'next/navigation'
+
 
 const QuizPage = ({quiz}: {quiz: IModuleItem}) => {
     return (
@@ -26,10 +28,11 @@ const QuizPage = ({quiz}: {quiz: IModuleItem}) => {
 
 const ModuleItem = ({ params: { courseId, moduleId, itemId } }: any) => {
 
-    const editMode = true
-
     const router = useRouter();
     const { moduleItem, getById } = useModuleItemService();
+    const searchParams = useSearchParams()
+    const teacher = searchParams.get('teacher')
+    console.log(teacher)
 
     useEffect(() => {
         if (!courseId && moduleId && itemId) return;
@@ -41,7 +44,7 @@ const ModuleItem = ({ params: { courseId, moduleId, itemId } }: any) => {
             case "codingChallenge":
                 return (
                     <RootLayout hideFooter>
-                        <Codespace task={moduleItem}/>
+                        <Codespace task={moduleItem} isTeacher={teacher === 'true'}/>
                     </RootLayout>
                 )
             case 'quiz':
