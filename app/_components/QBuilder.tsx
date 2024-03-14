@@ -1,12 +1,12 @@
 'use client';
 
-import { PanelGroup } from "react-resizable-panels"
-import ResizeHandle from "./base/ResizeHandle"
-import Panel from "./base/Panel";
 import TeacherAssistant from "./TeacherAssistant";
-import { Message, useChat } from 'ai/react';
+import { useChat } from 'ai/react';
 import Instructions from "./Instructions";
 import { useEffect, useState } from "react";
+import Grid from "./base/Grid";
+import SectionHeader from "./SectionHeader";
+import Section from "./Section";
 
 const pythonTopics: Topic[] = [
   {
@@ -166,17 +166,16 @@ const QBuilder = () => {
     */   
     
     return (
-        <div lang="eng" dir="ltr">
-            <PanelGroup direction="horizontal">
-                <Panel defaultSize={30} minSize={20}>
-                    <TeacherAssistant topics={pythonTopics} themes={questionThemes} levels={levels} processing={isLoading} onGenerateQuestion={handleQuestionGeneration}/>
-                </Panel>
-                <ResizeHandle direction="horizontal"/>
-                <Panel defaultSize={25} minSize={20}>
-                    <Instructions description={questionBody} processing={isLoading}/>
-                </Panel>
-            </PanelGroup>
-        </div>
+      <Section header={{
+        editMode: true,
+        custom: <TeacherAssistant topics={pythonTopics} themes={questionThemes} levels={levels} processing={isLoading} onGenerateQuestion={handleQuestionGeneration}/>
+      }}>
+        <div className="border border-[#dddddd] h-full rounded-lg">
+          <Instructions description={questionBody} processing={isLoading}/>
+        </div>        
+      </Section>
+
+
     )
 }
 

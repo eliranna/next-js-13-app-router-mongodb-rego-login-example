@@ -3,13 +3,13 @@ import PageHead from './PageHead';
 import Navbar from './Navbar';
 import ImageStrip from './base/ImageStrip';
 
-export default function RootLayout ({ title, children }: {title?: string, children: ReactNode}) {
+export default function RootLayout ({ title, hideFooter, children }: {title?: string, hideFooter?: boolean, children: ReactNode}) {
 
     return (
         <div>
             <PageHead title={title}/>
             <div>
-                <div className='min-h-screen mb-32'>
+                <div className='min-h-screen'>
                     <div>
                         <Navbar/>
                     </div>
@@ -20,9 +20,12 @@ export default function RootLayout ({ title, children }: {title?: string, childr
                         {children}
                     </div>
                 </div>
-                <div className='bg-black h-[200px] w-full'>
-               
-                </div>                
+                
+                {!hideFooter &&(
+                    <div className='bg-black h-[200px] w-full'>
+                    
+                    </div>
+                )}                
             </div>
         </div>
     )

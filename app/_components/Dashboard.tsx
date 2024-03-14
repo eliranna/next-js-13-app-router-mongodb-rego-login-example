@@ -28,7 +28,7 @@ const Dashboard = () => {
                             My Courses
                         </span>
                     </div>
-                    <div className="lg:col-start-4 lg:col-span-7 flex gap-6">
+                    <div className="lg:col-start-4 lg:col-span-7 flex gap-10">
                         {courses?.length && courses.map(course => (
                             <CourseCard key={course._id} course={course} onViewCourse={() => handleViewCourse(course._id)}/>
                         ))}              

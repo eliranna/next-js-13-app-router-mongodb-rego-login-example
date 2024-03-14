@@ -10,7 +10,6 @@ import { IModuleItem } from '_services/useCourseService';
 import Quiz from '_components/Quiz';
 import { Page } from '_components/base/Page';
 import Grid from '_components/base/Grid';
-import { useUserService } from '_services';
 import RootLayout from '_components/RootLayout';
 
 const QuizPage = ({quiz}: {quiz: IModuleItem}) => {
@@ -40,7 +39,11 @@ const ModuleItem = ({ params: { courseId, moduleId, itemId } }: any) => {
     const getModuleItem = (moduleItem: IModuleItem) => {
         switch (moduleItem.type) {
             case "codingChallenge":
-                return <Codespace task={moduleItem}/>
+                return (
+                    <RootLayout hideFooter>
+                        <Codespace task={moduleItem}/>
+                    </RootLayout>
+                )
             case 'quiz':
                 return (
                     <RootLayout>

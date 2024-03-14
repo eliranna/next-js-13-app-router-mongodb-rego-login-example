@@ -177,9 +177,7 @@ const Module = ({courseId, module, editMode}: {courseId: string, module: IModule
                             <ModuleItem 
                                 item={item} 
                                 editMode={editMode} 
-                                onEnter={() => handleOpenItem(courseId, module._id, item._id)}
-                                onEdit={() => handleOpenItem(courseId, module._id, item._id)}
-                                onViewResults={() => handleViewResults(item._id)}
+                                onEnter={() => editMode ? handleViewResults(item._id) : handleOpenItem(courseId, module._id, item._id)}
                                 />
                         </div>
                     ))}
@@ -190,6 +188,8 @@ const Module = ({courseId, module, editMode}: {courseId: string, module: IModule
 }
 
 const CourseModules = ({ courseId, modules, editMode }: {courseId: string, modules: IModule[], editMode?: boolean}) => {
+
+    const router = useRouter();
 
     const [accordionItems, setAccordionItems] = useState<AccordionItem[]>([])
 
@@ -203,8 +203,12 @@ const CourseModules = ({ courseId, modules, editMode }: {courseId: string, modul
         setAccordionItems(modulesItems)
     }, [modules])
 
+    const handleAddToItem = (itemId: string) => {
+      router.push(`/builder`)
+    }
+
     return (
-        <Accordion items={accordionItems} editMode={editMode} initialState={true}/>
+        <Accordion items={accordionItems} editMode={editMode} initialState={true} onAddToItem={handleAddToItem}/>
     )
 }
 

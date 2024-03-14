@@ -71,7 +71,7 @@ const TeacherAssistant = ({topics, themes, levels, processing, onGenerateQuestio
     }
 
     return (
-        <div className="flex flex-col p-10 gap-10">
+        <div className="flex flex-col gap-10">
 
           <div>
             <div>

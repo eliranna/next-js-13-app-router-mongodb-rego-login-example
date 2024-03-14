@@ -60,6 +60,7 @@ export interface ICourse {
     _id: string,
     title: string,
     coverImage: string,
+    description: string,
     modules: IModule[]
 }
 

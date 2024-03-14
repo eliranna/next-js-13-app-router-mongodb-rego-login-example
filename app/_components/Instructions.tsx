@@ -7,7 +7,7 @@ const Instructions = ({title, description, processing}: {title?: string, descrip
         <div className='text-4xl font-light'>
           {title}
         </div>
-        <div className='text-md'>
+        <div className='text-lg text-black prose-p:text-black prose-p:text-lg'>
           <Markdown>
             {description}
           </Markdown>

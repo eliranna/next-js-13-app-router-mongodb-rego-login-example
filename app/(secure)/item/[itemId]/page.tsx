@@ -8,6 +8,36 @@ import { Page } from "_components/base/Page"
 import TextInput from "_components/base/TextInput"
 import { IModuleItem } from "_services"
 import { IResultInfo, Status } from "_services/useResultsService"
+import Section from '_components/Section';
+
+export const ChallengeHeader = ({item, statusSummary}: {item: IModuleItem, statusSummary: IStatus[]}) => (
+    <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+                <div>
+                    <span className="uppercase text-dark-gray font-semibold text-sm tracking-wide">
+                        Challenge results
+                    </span>
+                </div>
+                <div>
+                    <span className='text-5xl leading-snug font-light'>
+                        {item.title}
+                    </span>                                
+                </div>
+            </div>
+            <div>
+                <span className='text-lg leading-relaxed'>
+                    {item.description}
+                </span>
+            </div>
+        </div>
+        <div>
+            <div className="flex flex-col gap-3">
+                
+            </div>
+        </div>
+    </div>
+)
 
 type IStatus = {
     caption: string,
@@ -131,61 +161,29 @@ const ItemPage = ({ params: { itemId } }: any) => {
         router.push(`/course/${result.courseId}/module/${result.moduleId}/item/${result.id}`)
     }
 
-    const ChallengeHeader = ({item, statusSummary}: {item: IModuleItem, statusSummary: IStatus[]}) => (
-        <div className="flex flex-col gap-10">
-            <div className="flex flex-col gap-4">
-                <div className="flex flex-col gap-2">
-                    <div>
-                        <span className="uppercase text-dark-gray font-semibold text-sm tracking-wide">
-                            Challenge results
-                        </span>
-                    </div>
-                    <div>
-                        <span className='text-5xl leading-snug font-light'>
-                            {item.title}
-                        </span>                                
-                    </div>
-                </div>
-                <div>
-                    <span className='text-lg leading-relaxed'>
-                        {item.description}
-                    </span>
-                </div>
-            </div>
-            <div>
-                <div className="flex flex-col gap-3">
-                    
-                </div>
-            </div>
-        </div>
-    )
+
 
     return (
-        <RootLayout>
-            <Page>
-                <Grid className='mt-20'>
-                    <div className="lg:col-start-1 lg:col-span-4">
-                        <ChallengeHeader item={item} statusSummary={statusSummary}/>
-                    </div>
-                    <div className="lg:col-start-6 lg:col-span-5 flex gap-6">
-                        <div className="flex flex-col w-full gap-10">
-                            <div>
-                                <TextInput eng placeholder="Search student" className="text-2xl"/>
+        <Section header={{
+            topic: 'Challenge Results',
+            title: item.title,
+            description: item.description
+        }}>
+            <div className="flex flex-col w-full gap-10">
+                <div>
+                    <TextInput eng placeholder="Search student" className="text-2xl"/>
+                </div>
+                <div className="flex flex-row gap-6 w-full flex-wrap">
+                    {results.map((result: IResultInfo) => {
+                        return (
+                            <div key={result.id} className="w-full">
+                                <Result result={result} onViewResult={() => handleViewResult(result)}/>
                             </div>
-                            <div className="flex flex-row gap-6 w-full flex-wrap">
-                                {results.map((result: IResultInfo) => {
-                                    return (
-                                        <div key={result.id} className="w-full">
-                                            <Result result={result} onViewResult={() => handleViewResult(result)}/>
-                                        </div>
-                                    )
-                                })} 
-                            </div>
-                        </div>
-                    </div>
-                </Grid>
-            </Page>
-        </RootLayout>
+                        )
+                    })} 
+                </div>
+            </div>
+        </Section>
     )
 }
 

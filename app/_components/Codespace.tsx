@@ -73,7 +73,7 @@ const Codespace = ({task}: {task?: IModuleItem}) => {
   }
 
   return (
-      <div className='h-screen'>
+      <div style={{height: 'calc(100vh - 82px'}}>
         {isTooltipVisible && (
           <SelectionTooltip position={tooltipPosition} onSelectionQuery={handleSelectionQuery}/>
         )}
