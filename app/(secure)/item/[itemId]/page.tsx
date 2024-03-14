@@ -131,27 +131,6 @@ const ItemPage = ({ params: { itemId } }: any) => {
         router.push(`/course/${result.courseId}/module/${result.moduleId}/item/${result.id}`)
     }
 
-    const StatusInfo = ({icon, count, caption}: {icon: string, count: number, caption: string}) => (
-        <div className="flex gap-4">
-            <div className="flex flex-col justify-center">
-                <img src={icon} className="w-[35px]"/>
-            </div>
-            <div className="flex flex-col justify-center">
-                <span>
-                    {`${count} ${caption}`}
-                </span>
-            </div>
-        </div>
-    )
-
-    const StatusBar = ({statusSummary}: {statusSummary: any}) => {
-        return statusSummary.map((status: IStatus) => (
-            <div>
-                <StatusInfo icon={status.icon} count={status.count} caption={status.caption}/>
-            </div>
-        ))
-    }
-
     const ChallengeHeader = ({item, statusSummary}: {item: IModuleItem, statusSummary: IStatus[]}) => (
         <div className="flex flex-col gap-10">
             <div className="flex flex-col gap-4">

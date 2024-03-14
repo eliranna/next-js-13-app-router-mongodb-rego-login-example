@@ -30,7 +30,7 @@ const Dashboard = () => {
                     </div>
                     <div className="lg:col-start-4 lg:col-span-7 flex gap-6">
                         {courses?.length && courses.map(course => (
-                            <CourseCard course={course} onViewCourse={() => handleViewCourse(course._id)}/>
+                            <CourseCard key={course._id} course={course} onViewCourse={() => handleViewCourse(course._id)}/>
                         ))}              
                     </div>
                 </Grid>

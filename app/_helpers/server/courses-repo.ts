@@ -33,7 +33,6 @@ async function getSummary(coursesIds: string[]): Promise<ICourseInfo[]> {
 
 async function getModuleItem(courseId: string, moduleId: string, itemId: string) {
 
-  console.log(courseId, moduleId, itemId)
   try {
     // First, find the course with the specified courseId
     const course = await Course.findById(courseId);
@@ -44,15 +43,14 @@ async function getModuleItem(courseId: string, moduleId: string, itemId: string)
     }
 
     // Then, find the module within that course with the specified moduleId
-    const module = course.modules.id(moduleId);
-    console.log(module)
+    const courseModule = course.modules.id(moduleId);
 
-    if (!module) {
+    if (!courseModule) {
       throw new Error('Module not found');
     }
 
     // Finally, find the item within the module with the specified itemId
-    const item = module.items.id(itemId);
+    const item = courseModule.items.id(itemId);
 
     if (!item) {
       throw new Error('Item not found');
