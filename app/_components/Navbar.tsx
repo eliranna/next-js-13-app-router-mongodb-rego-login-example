@@ -10,7 +10,7 @@ const Navbar = ({}) => {
     const { language, setLanguage } = useLocality();
 
     return (
-        <div className="w-full h-[64px] bg-black">
+        <div className="w-full h-[64px] bg-black" dir="ltr">
             <Page className="h-full">
                 <div className="h-full flex justify-between">
                     <div className="flex flex-col justify-center">

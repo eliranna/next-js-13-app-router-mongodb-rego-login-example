@@ -60,7 +60,7 @@ const computePrompt = (caption: assistantSugggestions, task: IModuleItem, code: 
   }
 }
 
-const Codespace = ({task, isTeacher, language}: {task?: IModuleItem, isTeacher: boolean, language?: Language}) => {
+const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) => {
 
   const [code, setCode] = useState<string>("");
   
@@ -73,8 +73,7 @@ const Codespace = ({task, isTeacher, language}: {task?: IModuleItem, isTeacher: 
 
   const ref = useRef<ImperativePanelHandle>(null);
 
-  const { append, messages } = useAssistant(language);
-  const [ assistantIsLoading, setAssistantIsLoading ] = useState<boolean>(false);
+  const { append, messages, isLoading } = useAssistant();
 
   useEffect(() => {
     task && setCode(task.initialCode || '')
@@ -90,7 +89,6 @@ const Codespace = ({task, isTeacher, language}: {task?: IModuleItem, isTeacher: 
   useEffect(() => {
     if (messages && messages.length > 0) {
       toggleAssistantPanel(true);
-      setAssistantIsLoading(false);
     }
   }, [messages])
 
@@ -100,7 +98,6 @@ const Codespace = ({task, isTeacher, language}: {task?: IModuleItem, isTeacher: 
 
   const handleSelectionQuery = async () => {
     closeTooltip()
-    setAssistantIsLoading(true)
     await append({
       id: 'some-id',
       content: `explain this: ${selectedText}`,
@@ -110,7 +107,6 @@ const Codespace = ({task, isTeacher, language}: {task?: IModuleItem, isTeacher: 
 
   const handleSuggestionClick = async (caption: assistantSugggestions) => {
     if (!task) {return}
-    setAssistantIsLoading(true)
     const prompt: string | null = computePrompt(caption, task, code)
     prompt && await append({
       id: 'some-id',
@@ -137,7 +133,7 @@ const Codespace = ({task, isTeacher, language}: {task?: IModuleItem, isTeacher: 
                 <AssistantPanel 
                   messages={messages} 
                   isOpen={assistantPanelIsOpen} 
-                  isLoading={assistantIsLoading}
+                  isLoading={isLoading}
                   onToggle={() => toggleAssistantPanel(!assistantPanelIsOpen)}>
                     <StudentAssistant 
                       suggestions={isTeacher ? teacherAssistantSugggestions : studentAssistantSugggestions} 

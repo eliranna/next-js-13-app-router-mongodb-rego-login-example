@@ -48,7 +48,7 @@ const ModuleItem = ({ params: { courseId, moduleId, itemId } }: any) => {
             case "codingChallenge":
                 return (
                     <RootLayout hideFooter>
-                        <Codespace task={moduleItem} isTeacher={teacher === 'true'} language={language}/>
+                        <Codespace task={moduleItem} isTeacher={teacher === 'true'}/>
                     </RootLayout>
                 )
             case 'quiz':

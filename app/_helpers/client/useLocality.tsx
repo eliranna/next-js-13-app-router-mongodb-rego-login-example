@@ -6,6 +6,7 @@ import React, { createContext, useContext, useState, ReactNode, useEffect } from
 interface LocalityContextState {
   language: Language;
   direction: Direction;
+  languageName: LanguageName;
   setLanguage: (language: Language) => void;
 }
 
@@ -18,20 +19,23 @@ interface LocalityProviderProps {
 }
 
 export type Language = 'en' | 'he'
+export type LanguageName = 'English' | 'Hebrew'
 export type Direction = 'ltr' | 'rtl'
 
 // Create the provider component
 export const LocalityProvider: React.FC<LocalityProviderProps> = ({ children }) => {
 
   const [language, setLanguage] = useState<Language>('en');
+  const [languageName, setLanguageName] = useState<LanguageName>('English');
   const [direction, setDirection] = useState<Direction>('ltr');
 
   useEffect(() => {
     setDirection(language === 'en' ? 'ltr' : 'rtl')
+    setLanguageName(language === 'en' ? 'English' : 'Hebrew')
   }, [language])
 
   return (
-    <LocalityContext.Provider value={{ language, direction, setLanguage }}>
+    <LocalityContext.Provider value={{ language, languageName, direction, setLanguage }}>
       {children}
     </LocalityContext.Provider>
   );
