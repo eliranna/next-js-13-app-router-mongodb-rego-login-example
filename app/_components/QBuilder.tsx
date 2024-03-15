@@ -149,7 +149,7 @@ const QBuilder = () => {
         editMode: true,
         custom: <TeacherAssistant topics={pythonTopics} themes={questionThemes} levels={levels} processing={isLoading} onGenerateQuestion={handleQuestionGeneration}/>
       }}>
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-10 h-full">
           <div className="flex justify-end">
             <RunButton secondary icon="/icons/check-black.svg">
               Publish
