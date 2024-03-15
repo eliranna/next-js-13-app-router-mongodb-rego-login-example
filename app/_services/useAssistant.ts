@@ -1,5 +1,4 @@
-import { Message } from "ai"
-import { useChat } from "ai/react"
+import { useChat, Message } from "ai/react"
 import { useEffect, useState } from "react"
 
 const composeTranslationPrompt = (content: string, language: string) => {

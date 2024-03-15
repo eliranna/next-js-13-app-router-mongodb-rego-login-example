@@ -102,6 +102,7 @@ const Codespace = ({task, isTeacher, language}: {task?: IModuleItem, isTeacher: 
     closeTooltip()
     setAssistantIsLoading(true)
     await append({
+      id: 'some-id',
       content: `explain this: ${selectedText}`,
       role: 'user'
     })
@@ -112,6 +113,7 @@ const Codespace = ({task, isTeacher, language}: {task?: IModuleItem, isTeacher: 
     setAssistantIsLoading(true)
     const prompt: string | null = computePrompt(caption, task, code)
     prompt && await append({
+      id: 'some-id',
       content: prompt,
       role: 'user'
     })    
