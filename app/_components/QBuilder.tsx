@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Grid from "./base/Grid";
 import SectionHeader from "./SectionHeader";
 import Section from "./Section";
+import RunButton from "./base/RunButton";
 
 const pythonTopics: Topic[] = [
   {
@@ -148,9 +149,16 @@ const QBuilder = () => {
         editMode: true,
         custom: <TeacherAssistant topics={pythonTopics} themes={questionThemes} levels={levels} processing={isLoading} onGenerateQuestion={handleQuestionGeneration}/>
       }}>
-        <div className="border border-[#dddddd] h-full rounded-lg">
-          <Instructions description={questionBody} processing={isLoading}/>
-        </div>        
+        <div className="flex flex-col gap-10">
+          <div className="flex justify-end">
+            <RunButton secondary icon="/icons/check-black.svg">
+              Publish
+            </RunButton>
+          </div>
+          <div className="border border-[#dddddd] h-full rounded-lg">
+            <Instructions description={questionBody} processing={isLoading}/>
+          </div>  
+        </div>      
       </Section>
 
 

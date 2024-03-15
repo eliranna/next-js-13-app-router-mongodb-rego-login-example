@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     messages,
     model: 'claude-2.1',
     stream: true,
-    max_tokens: 300,
+    max_tokens: 4096,
   });
 
   console.log(response)

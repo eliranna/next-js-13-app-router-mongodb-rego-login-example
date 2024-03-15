@@ -1,8 +1,9 @@
 import { Message } from "ai"
 import { useEffect, useState } from "react";
 import Markdown from "_components/base/Markdown"
+import Spinner from "./base/Spinner";
 
-const Assistant = ({messages}: {messages: Message[]}) => {
+const Assistant = ({isLoading, messages}: {isLoading?: boolean, messages: Message[]}) => {
 
     const [currentMessage, setCurrentMessage] = useState<string | null>()
     
@@ -12,9 +13,11 @@ const Assistant = ({messages}: {messages: Message[]}) => {
 
     return (
         <div>
-            <Markdown>
-                {currentMessage}
-            </Markdown>
+            {isLoading ? <Spinner/> : (
+                <Markdown>
+                    {currentMessage}
+                </Markdown>
+            )}
         </div>
     )
 }

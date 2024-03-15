@@ -73,17 +73,6 @@ const TeacherAssistant = ({topics, themes, levels, processing, onGenerateQuestio
     return (
         <div className="flex flex-col gap-10">
 
-          <div>
-            <div className="flex gap-4 justify-between">
-              <RunButton secondary processing={processing} onClick={handleGenerateQuestion} icon="/icons/light.svg">
-                Generate Question
-              </RunButton>
-              <RunButton icon="/icons/check-black.svg">
-                Publish
-              </RunButton>
-            </div>
-          </div>          
-
           <div className="flex flex-col gap-8">
             <div className="uppercase text-sm font-semibold text-dark-gray">
               Topics
@@ -110,6 +99,14 @@ const TeacherAssistant = ({topics, themes, levels, processing, onGenerateQuestio
               <ChipBar chips={themeChips} onChipClick={onThemeToggle}/>
             </div>
           </div>
+
+          <div>
+            <div className="flex gap-4 flex-col">
+              <RunButton processing={processing} onClick={handleGenerateQuestion} icon="/icons/light.svg">
+                Generate Question
+              </RunButton>
+            </div>
+          </div>  
 
 
           

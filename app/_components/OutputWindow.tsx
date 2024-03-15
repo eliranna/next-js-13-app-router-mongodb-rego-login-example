@@ -2,10 +2,8 @@ import React from "react";
 import CodeEditor from "./CodeEditor";
 
 const OutputWindow = ({ outputDetails }: {outputDetails: any}) => {
-  console.log(outputDetails)
   const getOutput = () => {
     let statusId = outputDetails?.status?.id;
-
     if (statusId === 6) {
       // compilation error
       return (

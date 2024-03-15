@@ -1,4 +1,5 @@
 import { EditModeProvider } from '_helpers/client/useEditMode';
+import { LocalityProvider } from '_helpers/client/useLocality';
 import 'globals.css';
 
 import { Assistant } from "next/font/google";
@@ -9,15 +10,18 @@ export const metadata = {
     title: 'Cyberpad'
 }
 
-function Layout({ children }: { children: React.ReactNode }) {
+const Layout = ({ children }: { children: React.ReactNode }) => {
+
     return (
-        <html lang="en" dir='ltr'>
-            <body className={assistant.className}>
-                <EditModeProvider>
-                    {children}
-                </EditModeProvider>
-            </body>
-        </html>
+        <LocalityProvider>
+            <html>
+                <body className={assistant.className}>
+                    <EditModeProvider>
+                        {children}
+                    </EditModeProvider>
+                </body>
+            </html>
+        </LocalityProvider>
     );
 }
 

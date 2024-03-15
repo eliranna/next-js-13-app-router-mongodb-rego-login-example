@@ -1,9 +1,13 @@
 import { Message } from "ai"
 import Assistant from "./Assistant"
 import AutoScrollDiv from "./base/AutoScrollDiv"
-import Chip from "./base/Chip"
+import { useLocality } from "_helpers/client/useLocality"
+import { useCaptions } from "_helpers/client/useCaptions"
 
-const AssistantPanel = ({messages, isOpen, onToggle, children}: {messages: Message[], isOpen?: boolean, onToggle?: any, children?: any}) => {
+const AssistantPanel = ({messages, isOpen, onToggle, isLoading, children}: {messages: Message[], isOpen?: boolean, onToggle?: any, isLoading?: boolean, children?: any}) => {
+
+    const { language, direction } = useLocality()
+    const { getCaption } = useCaptions()
 
     const topbar = (
         <div className="flex justify-between mb-6">
@@ -13,7 +17,7 @@ const AssistantPanel = ({messages, isOpen, onToggle, children}: {messages: Messa
                 </div>
                 <div>
                     <span>
-                        Python Assistant
+                        {getCaption('Python Assistant')}
                     </span>
                 </div>
             </div>
@@ -26,7 +30,7 @@ const AssistantPanel = ({messages, isOpen, onToggle, children}: {messages: Messa
     )
 
     return (
-        <div className="h-full flex flex-col p-6 overflow-y-scroll">
+        <div className="h-full flex flex-col p-6 overflow-y-scroll" dir={direction} lang={language}>
             <div>
                 {topbar}
             </div>
@@ -34,7 +38,7 @@ const AssistantPanel = ({messages, isOpen, onToggle, children}: {messages: Messa
                 {children}
             </div>
             <AutoScrollDiv>
-                <Assistant messages={messages.filter(message => message.role === 'assistant')}/>
+                <Assistant isLoading={isLoading} messages={messages.filter(message => message.role === 'assistant')}/>
             </AutoScrollDiv>
       </div>
     )

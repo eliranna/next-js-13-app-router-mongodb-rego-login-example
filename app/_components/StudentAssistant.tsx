@@ -1,4 +1,4 @@
-import Chip, { ChipItem } from "./base/Chip"
+import { ChipItem } from "./base/Chip"
 import ChipBar from "./base/ChipBar"
 
 const StudentAssistant = ({suggestions, onAssistanceRequest}: {suggestions: string[], onAssistanceRequest: any}) => {

@@ -2,10 +2,12 @@ import Link from "next/link"
 import Avatar from "./base/Avatar"
 import { Page } from "./base/Page"
 import { useEditMode } from "_helpers/client/useEditMode";
+import { useLocality } from "_helpers/client/useLocality";
 
 const Navbar = ({}) => {
 
     const { toggleEditMode } = useEditMode();
+    const { language, setLanguage } = useLocality();
 
     return (
         <div className="w-full h-[64px] bg-black">
@@ -17,6 +19,11 @@ const Navbar = ({}) => {
                         </Link>
                     </div>
                     <div className="h-full flex flex-row justify-end gap-6">
+                        <div className="flex flex-col justify-center cursor-pointer" onClick={() => toggleEditMode()}>
+                            <span className="text-white" onClick={() => setLanguage(language === 'en' ? 'he' : 'en')}>
+                                {language === 'en' ? 'En' : 'Heb'}
+                            </span>
+                        </div>
                         <div className="flex flex-col justify-center cursor-pointer" onClick={() => toggleEditMode()}>
                             <img src='/icons/swap.svg' className="invert w-[25px]"/>
                         </div>

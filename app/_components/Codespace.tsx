@@ -14,23 +14,20 @@ import ResizeHandle from "./base/ResizeHandle";
 import Panel from "./base/Panel";
 import { IModuleItem } from '_services';
 import StudentAssistant from './StudentAssistant';
-
-const python = {
-  id: 71,
-  name: "Python (2.7.17)",
-  label: "Python (2.7.17)",
-  value: "python",
-}
+import { useAssistant } from '_services/useAssistant';
+import { Language } from '_helpers/client/useLocality';
+import { boolean } from 'joi';
 
 type assistantSugggestions = 
   'Explain the question' 
 | 'Give me a hint' 
 | 'How to start?' 
+| 'How to continue?' 
 | 'Am I on the right track?'
-| `Estimate student's progress`
-| `Where does the student shows difficulties?`
+| "Estimate student's progress"
+| "Where does the student shows difficulties?"
 
-const studentAssistantSugggestions: assistantSugggestions[] = ['Explain the question', 'Give me a hint', 'How to start?', 'Am I on the right track?']
+const studentAssistantSugggestions: assistantSugggestions[] = ['Explain the question', 'Give me a hint', 'How to start?', 'How to continue?', 'Am I on the right track?']
 const teacherAssistantSugggestions: assistantSugggestions[] = ["Estimate student's progress", "Where does the student shows difficulties?"]
 
 const computePrompt = (caption: assistantSugggestions, task: IModuleItem, code: string) => {
@@ -44,7 +41,10 @@ const computePrompt = (caption: assistantSugggestions, task: IModuleItem, code: 
       return `Give me a hint for solving the question without solving it: ${task.description}`   
 
     case 'How to start?':
-      return `Show me how to start the solution of the following question: ${task.description}`  
+      return `Show me how to start the solution of the following question: ${task.description}`
+
+    case 'How to continue?':
+      return `Show me how to continue the solution of the following question: ${task.description} from this point: ${code}`    
 
     case 'Am I on the right track?':
       return `I have been given the following python programming question: ${task.description}. I have reached the following code: ${code}. Am I on the right track? how far is this from solution? estimate me but dont solve the question.` 
@@ -60,12 +60,11 @@ const computePrompt = (caption: assistantSugggestions, task: IModuleItem, code: 
   }
 }
 
-const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) => {
+const Codespace = ({task, isTeacher, language}: {task?: IModuleItem, isTeacher: boolean, language?: Language}) => {
 
   const [code, setCode] = useState<string>("");
   
   const [customInput, setCustomInput] = useState("")
-  const [language, _ ] = useState(python)
 
   const [assistantPanelIsOpen, toggleAssistantPanel] = useState(false)
 
@@ -74,7 +73,8 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
 
   const ref = useRef<ImperativePanelHandle>(null);
 
-  const { append, messages, isLoading } = useChat({api: '/api/gpt'});
+  const { append, messages } = useAssistant(language);
+  const [ assistantIsLoading, setAssistantIsLoading ] = useState<boolean>(false);
 
   useEffect(() => {
     task && setCode(task.initialCode || '')
@@ -88,15 +88,19 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
   }, [assistantPanelIsOpen])
 
   useEffect(() => {
-    messages && messages.length > 0 && toggleAssistantPanel(true)
+    if (messages && messages.length > 0) {
+      toggleAssistantPanel(true);
+      setAssistantIsLoading(false);
+    }
   }, [messages])
 
   const handleExecute = () => {
-    compile(language.id, code, customInput);
+    compile(71, code, customInput);
   };
 
   const handleSelectionQuery = async () => {
     closeTooltip()
+    setAssistantIsLoading(true)
     await append({
       content: `explain this: ${selectedText}`,
       role: 'user'
@@ -105,8 +109,8 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
 
   const handleSuggestionClick = async (caption: assistantSugggestions) => {
     if (!task) {return}
+    setAssistantIsLoading(true)
     const prompt: string | null = computePrompt(caption, task, code)
-    console.log(prompt)
     prompt && await append({
       content: prompt,
       role: 'user'
@@ -114,7 +118,7 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
   }
 
   return (
-      <div style={{height: 'calc(100vh - 82px'}}>
+      <div style={{height: 'calc(100vh - 82px'}} dir='ltr' lang='en'>
         {isTooltipVisible && (
           <SelectionTooltip position={tooltipPosition} onSelectionQuery={handleSelectionQuery}/>
         )}
@@ -131,6 +135,7 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
                 <AssistantPanel 
                   messages={messages} 
                   isOpen={assistantPanelIsOpen} 
+                  isLoading={assistantIsLoading}
                   onToggle={() => toggleAssistantPanel(!assistantPanelIsOpen)}>
                     <StudentAssistant 
                       suggestions={isTeacher ? teacherAssistantSugggestions : studentAssistantSugggestions} 
