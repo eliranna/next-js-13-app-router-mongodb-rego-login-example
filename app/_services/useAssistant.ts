@@ -17,8 +17,8 @@ export const useAssistant = (language?: string) => {
         !gptIsLoading && gptMessages && gptMessages.length > 0 && setGPTLastResponse(gptMessages[gptMessages.length-1].content)
     }, [gptMessages, gptIsLoading])
 
-    language && useEffect(() => {
-        GPTLastResponse && appendToClude({
+    useEffect(() => {
+        language && GPTLastResponse && appendToClude({
             content: composeTranslationPrompt(GPTLastResponse, language),
             role: 'user'
         })
