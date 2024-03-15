@@ -49,10 +49,10 @@ const computePrompt = (caption: assistantSugggestions, task: IModuleItem, code: 
     case 'Am I on the right track?':
       return `I have been given the following python programming question: ${task.description}. I have reached the following code: ${code}. Am I on the right track? how far is this from solution? estimate me but dont solve the question.` 
 
-    case `Estimate student's progress`:
+    case "Estimate student's progress":
       return `Given the following python programming question: ${task.description}. The student has replayed with the following code: ${code}. is the given code is a good solution? if not, explain what is missing and how much it is far from solution. Grade this solution between 0 to 100 and tell us if the student is in the right direction or that it is not the right way.` 
       
-    case `Where does the student shows difficulties?`:
+    case "Where does the student shows difficulties?":
       return `Given the following python programming question: ${task.description}. The student has replayed with the following code: ${code}. According to this, list the main topics the student might be straggeling with and suggest ways to help him. However, if you think that that student shows no difficulties in the topic of the question, then tell this and offer some ways to take the student to the next level.`       
 
     default:
@@ -65,6 +65,7 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
   const [code, setCode] = useState<string>("");
   
   const [customInput, setCustomInput] = useState("")
+  const [currentCaption, setCurrentCaption] = useState<assistantSugggestions | null>(null)
 
   const [assistantPanelIsOpen, toggleAssistantPanel] = useState(false)
   const [isAssistantLoading, setIsAssistantLoading] = useState(false)
@@ -88,10 +89,7 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
   }, [assistantPanelIsOpen])
 
   useEffect(() => {
-    console.log(messageStream)
     if (messageStream) {
-      console.log(messageStream)
-      console.log('end loading')
       toggleAssistantPanel(true);
       setIsAssistantLoading(false)
     }
@@ -110,14 +108,11 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
     })
   }
 
-  const [currentCaption, setCurrentCaption] = useState<assistantSugggestions | null>(null)
-
   const handleSuggestionClick = async (caption: assistantSugggestions) => {
     setCurrentCaption(caption)   
   }
 
   useEffect(() => {
-    console.log('start loading')
     currentCaption && setIsAssistantLoading(true)
   }, [currentCaption])
 

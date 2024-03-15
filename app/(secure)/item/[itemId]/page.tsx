@@ -30,9 +30,9 @@ const ItemPage = ({ params: { itemId } }: any) => {
             moduleId: 'sssds',
             user: {
                 id: '232323',
-                firstName: 'Eliran',
-                lastName: 'Natan',
-                photo: "https://res.cloudinary.com/dfdk4g2pj/image/upload/v1686484160/118732079_10223558435893099_3741007992127305573_n_i30ygn.jpg"
+                firstName: 'Noa',
+                lastName: 'Fayberg',
+                photo: "https://res.cloudinary.com/dfdk4g2pj/image/upload/v1710543269/image_40_sx7mjc.png"
             },
             status: 'inProgress'
         },
@@ -42,9 +42,9 @@ const ItemPage = ({ params: { itemId } }: any) => {
             moduleId: 'sssds',
             user: {
                 id: '2323232',
-                firstName: 'Noa',
-                lastName: 'Maller',
-                photo: "https://res.cloudinary.com/dfdk4g2pj/image/upload/v1689274114/1686386684251_enpdz9.jpg"
+                firstName: 'Maria',
+                lastName: 'Solomon',
+                photo: "https://res.cloudinary.com/dfdk4g2pj/image/upload/v1710543346/image_37_ytyodi_1_fei18z.png"
             },
             grade: 100,
             status: 'submitted'
@@ -55,9 +55,9 @@ const ItemPage = ({ params: { itemId } }: any) => {
             moduleId: 'sssds',
             user: {
                 id: '2323232',
-                firstName: 'Noa',
-                lastName: 'Maller',
-                photo: "https://res.cloudinary.com/dfdk4g2pj/image/upload/v1689274114/1686386684251_enpdz9.jpg"
+                firstName: 'Lin',
+                lastName: 'Kuman',
+                photo: "https://res.cloudinary.com/dfdk4g2pj/image/upload/v1710543457/elirannatan_A_13_year_old_american_korean_student_wearing_black_fc4b7b83-58f4-4480-a6d2-cb874b754aa9_v49avg_1_iu6asw.png"
             },
             status: 'notStarted'
         },
@@ -67,9 +67,9 @@ const ItemPage = ({ params: { itemId } }: any) => {
             moduleId: 'sssds',
             user: {
                 id: '2323232',
-                firstName: 'Noa',
-                lastName: 'Maller',
-                photo: "https://res.cloudinary.com/dfdk4g2pj/image/upload/v1689274114/1686386684251_enpdz9.jpg"
+                firstName: 'Israel',
+                lastName: 'Nagamo',
+                photo: "https://res.cloudinary.com/dfdk4g2pj/image/upload/v1710543526/0_0_ssjld9_1_umda6n.png"
             },
             status: 'inProgress'
         },
@@ -79,9 +79,9 @@ const ItemPage = ({ params: { itemId } }: any) => {
             moduleId: 'sssds',
             user: {
                 id: '2323232',
-                firstName: 'Noa',
-                lastName: 'Maller',
-                photo: "https://res.cloudinary.com/dfdk4g2pj/image/upload/v1689274114/1686386684251_enpdz9.jpg"
+                firstName: 'Michael',
+                lastName: 'Hucktain',
+                photo: "https://res.cloudinary.com/dfdk4g2pj/image/upload/v1710543587/elirannatan_A_cheerful_15_year_old_american_asian_teenage_boy_m_e3385d99-d824-4ac7-8971-cb84ac4d8107_m6rbh3_1_n8ftlq.png"
             },
             status: 'inProgress'
         },
@@ -91,9 +91,9 @@ const ItemPage = ({ params: { itemId } }: any) => {
             moduleId: 'sssds',
             user: {
                 id: '2323232',
-                firstName: 'Noa',
-                lastName: 'Maller',
-                photo: "https://res.cloudinary.com/dfdk4g2pj/image/upload/v1689274114/1686386684251_enpdz9.jpg"
+                firstName: 'Amira',
+                lastName: 'Hijabar',
+                photo: "https://res.cloudinary.com/dfdk4g2pj/image/upload/v1710543651/elirannatan_A_cheerful_15_year_old_american_asian_female_wearin_683939c7-2e84-4c52-a85f-f7b607eec07c_mptb2e_1_ycqvvu.png"
             },
             grade: 95,
             status: 'submitted'
