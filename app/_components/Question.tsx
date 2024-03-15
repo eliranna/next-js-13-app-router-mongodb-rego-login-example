@@ -170,9 +170,7 @@ const Question = ({question, editMode, onChange}: {question: IQuestion, editMode
         const updatedOptionsArray = question.options && question.options.map((option, index) => 
             index === indexToUpdate ? { ...option, ...updateValues } : option
         );
-
-        console.log(updatedOptionsArray)
-
+        
         handleChange({
             options: updatedOptionsArray 
         })

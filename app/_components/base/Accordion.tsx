@@ -42,7 +42,6 @@ const Accordion = ({items = [], editMode, initialState = false, onTitleChange, o
             }
             return item;
         })
-        console.log(newState)
         setState(newState);
     }
 

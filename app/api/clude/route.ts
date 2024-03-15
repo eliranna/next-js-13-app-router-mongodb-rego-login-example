@@ -12,7 +12,6 @@ export const runtime = 'edge';
 export async function POST(req: Request) {
   // Extract the `prompt` from the body of the request
   const { messages } = await req.json();
-  console.log(messages)
  
   // Ask Claude for a streaming chat completion given the prompt
   const response = await anthropic.messages.create({
@@ -21,8 +20,6 @@ export async function POST(req: Request) {
     stream: true,
     max_tokens: 4096,
   });
-
-  console.log(response)
  
   // Convert the response into a friendly text-stream
   const stream = AnthropicStream(response);

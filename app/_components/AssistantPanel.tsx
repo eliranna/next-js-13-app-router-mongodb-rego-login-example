@@ -1,10 +1,9 @@
-import { Message } from "ai"
 import Assistant from "./Assistant"
 import AutoScrollDiv from "./base/AutoScrollDiv"
 import { useLocality } from "_helpers/client/useLocality"
 import { useCaptions } from "_helpers/client/useCaptions"
 
-const AssistantPanel = ({messages, isOpen, onToggle, isLoading, children}: {messages: Message[], isOpen?: boolean, onToggle?: any, isLoading?: boolean, children?: any}) => {
+const AssistantPanel = ({message, isOpen, onToggle, isLoading, children}: {message: string | null, isOpen?: boolean, onToggle?: any, isLoading?: boolean, children?: any}) => {
 
     const { language, direction } = useLocality()
     const { getCaption } = useCaptions()
@@ -38,7 +37,7 @@ const AssistantPanel = ({messages, isOpen, onToggle, isLoading, children}: {mess
                 {children}
             </div>
             <AutoScrollDiv>
-                <Assistant isLoading={isLoading} messages={messages.filter(message => message.role === 'assistant')}/>
+                <Assistant isLoading={isLoading} message={message}/>
             </AutoScrollDiv>
       </div>
     )

@@ -36,7 +36,6 @@ async function getModuleItem(courseId: string, moduleId: string, itemId: string)
   try {
     // First, find the course with the specified courseId
     const course = await Course.findById(courseId);
-    console.log(course)
 
     if (!course) {
       throw new Error('Course not found');

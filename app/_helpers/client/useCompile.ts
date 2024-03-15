@@ -31,7 +31,6 @@ const useCompile = () => {
 
     try {
       const response = await axios.request(options);
-      console.log("res.data", response.data);
       const token = response.data.token;
       checkStatus(token);
     } catch (err) {
@@ -58,7 +57,6 @@ const useCompile = () => {
       } else {
         setProcessing(false);
         setOutputDetails(response.data);
-        console.log("response.data", response.data);
       }
     } catch (err) {
       handleAxiosError(err);
@@ -71,7 +69,6 @@ const useCompile = () => {
       const error = err as AxiosError;
       let message = error.message;
       let status = error.response?.status;
-      console.log("Error status:", status, "Message:", message);
       if (status === 429) {
         console.log("Too many requests");
         // Handle specific error...

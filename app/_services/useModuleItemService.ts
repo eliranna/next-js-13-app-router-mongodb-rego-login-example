@@ -173,7 +173,6 @@ function useModuleItemService(): IModuleItemService {
     const fetch = useFetch();
 
     useEffect(() => {
-        console.log(language)
         moduleItemStore.setState({moduleItem: language === 'en' ? demoSampleEng : demoSampleHeb})
     }, [language])
 

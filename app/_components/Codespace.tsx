@@ -67,13 +67,14 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
   const [customInput, setCustomInput] = useState("")
 
   const [assistantPanelIsOpen, toggleAssistantPanel] = useState(false)
+  const [isAssistantLoading, setIsAssistantLoading] = useState(false)
 
   const { compile, processing, outputDetails } = useCompile();
   const { selectedText, tooltipPosition, isTooltipVisible, closeTooltip } = useSelectionTooltip();
 
   const ref = useRef<ImperativePanelHandle>(null);
 
-  const { append, messages, isLoading } = useAssistant();
+  const { append, message, messageStream, resetMessageStream } = useAssistant();
 
   useEffect(() => {
     task && setCode(task.initialCode || '')
@@ -87,10 +88,14 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
   }, [assistantPanelIsOpen])
 
   useEffect(() => {
-    if (messages && messages.length > 0) {
+    console.log(messageStream)
+    if (messageStream) {
+      console.log(messageStream)
+      console.log('end loading')
       toggleAssistantPanel(true);
+      setIsAssistantLoading(false)
     }
-  }, [messages])
+  }, [messageStream])
 
   const handleExecute = () => {
     compile(71, code, customInput);
@@ -105,15 +110,29 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
     })
   }
 
+  const [currentCaption, setCurrentCaption] = useState<assistantSugggestions | null>(null)
+
   const handleSuggestionClick = async (caption: assistantSugggestions) => {
-    if (!task) {return}
-    const prompt: string | null = computePrompt(caption, task, code)
-    prompt && await append({
-      id: 'some-id',
-      content: prompt,
-      role: 'user'
-    })    
+    setCurrentCaption(caption)   
   }
+
+  useEffect(() => {
+    console.log('start loading')
+    currentCaption && setIsAssistantLoading(true)
+  }, [currentCaption])
+
+  useEffect(() => {
+    if (isAssistantLoading === true) {
+      resetMessageStream()
+      if (!currentCaption || !task) return 
+      const prompt: string | null = computePrompt(currentCaption, task, code)
+      prompt && append({
+        id: 'some-id',
+        content: prompt,
+        role: 'user'
+      })  
+    }
+  }, [isAssistantLoading])
 
   return (
       <div style={{height: 'calc(100vh - 82px'}} dir='ltr' lang='en'>
@@ -131,9 +150,9 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
               <ResizeHandle direction="vertical"/>
               <Panel defaultSize={30} minSize={0} ref={ref} style={{transition: 'all 0.3s ease'}}>
                 <AssistantPanel 
-                  messages={messages} 
+                  message={messageStream} 
                   isOpen={assistantPanelIsOpen} 
-                  isLoading={isLoading}
+                  isLoading={isAssistantLoading}
                   onToggle={() => toggleAssistantPanel(!assistantPanelIsOpen)}>
                     <StudentAssistant 
                       suggestions={isTeacher ? teacherAssistantSugggestions : studentAssistantSugggestions} 

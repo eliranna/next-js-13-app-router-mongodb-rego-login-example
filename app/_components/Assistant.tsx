@@ -1,21 +1,13 @@
-import { Message } from "ai"
-import { useEffect, useState } from "react";
 import Markdown from "_components/base/Markdown"
 import Spinner from "./base/Spinner";
+import { useEffect } from "react";
 
-const Assistant = ({isLoading, messages}: {isLoading?: boolean, messages: Message[]}) => {
-
-    const [currentMessage, setCurrentMessage] = useState<string | null>()
-    
-    useEffect(() => {
-        messages && messages.length > 0 && setCurrentMessage(messages[messages.length-1].content)
-    }, [messages])
-
+const Assistant = ({isLoading, message}: {isLoading?: boolean, setIsLoading?: any, message: string | null}) => {
     return (
         <div>
             {isLoading ? <Spinner/> : (
                 <Markdown>
-                    {currentMessage}
+                    {message}
                 </Markdown>
             )}
         </div>

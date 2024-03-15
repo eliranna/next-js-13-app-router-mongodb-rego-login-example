@@ -15,11 +15,6 @@ const SoftButton = ({caption, icon, selected, onClick}: {caption: string, icon?:
 }
 
 const LevelBar = ({chips, onChipClick}: {chips: ChipItem[], onChipClick?: any}) => {
-
-    useEffect(() => {
-        console.log(chips)
-    }, [chips])
-
     return (
         <div className="flex gap-4 flex-wrap pb-6">
             {chips.map((chip: ChipItem, index: number) => (

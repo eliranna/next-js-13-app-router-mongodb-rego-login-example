@@ -36,8 +36,6 @@ const ModuleItem = ({ params: { courseId, moduleId, itemId } }: any) => {
     const searchParams = useSearchParams()
     const teacher = searchParams.get('teacher')
 
-    console.log(teacher)
-
     useEffect(() => {
         if (!courseId && moduleId && itemId) return;
         getById(courseId, moduleId, itemId)
