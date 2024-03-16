@@ -9,6 +9,8 @@ import SectionHeader from "./SectionHeader";
 import Section from "./Section";
 import RunButton from "./base/RunButton";
 import { useAssistant } from "_services/useAssistant";
+import { CaptionToken, useCaptions } from "_helpers/client/useCaptions";
+import { useLocality } from "_helpers/client/useLocality";
 
 const pythonTopics: Topic[] = [
   {
@@ -131,6 +133,8 @@ const composePrompt = (level: string, themes: string[], topics: string[]) => {
 
 const QBuilder = () => {
 
+    const {getCaption} = useCaptions()
+
     const { append, messageStream, resetMessageStream, message } = useAssistant();
     const [isLoading, setIsLoading] = useState(false)
 
@@ -176,7 +180,7 @@ const QBuilder = () => {
         <div className="flex flex-col gap-10 h-full">
           <div className="flex justify-end">
             <RunButton secondary icon="/icons/check-black.svg">
-              Publish
+              {getCaption("Publish" as CaptionToken)}
             </RunButton>
           </div>
           <div className="border border-[#dddddd] h-full rounded-lg">

@@ -4,8 +4,11 @@ import { ChipItem } from "./base/Chip";
 import RunButton from "./base/RunButton";
 import { Topic, QuestionTheme, QuestionLevel } from "./QBuilder";
 import LevelBar from "./base/LevelBar";
+import { CaptionToken, useCaptions } from "_helpers/client/useCaptions";
 
 const TeacherAssistant = ({topics, themes, levels, processing, onGenerateQuestion}: {topics: Topic[], themes: QuestionTheme[], levels: QuestionLevel[], processing: boolean, onGenerateQuestion: any}) => {
+
+    const {getCaption} = useCaptions()
 
     const [ topicChips, setTopicChips ] = useState<ChipItem[]>([]) 
     const [ levelChips, setLevelChips ] = useState<ChipItem[]>([])
@@ -75,7 +78,7 @@ const TeacherAssistant = ({topics, themes, levels, processing, onGenerateQuestio
 
           <div className="flex flex-col gap-8">
             <div className="uppercase text-sm font-semibold text-dark-gray">
-              Topics
+              {getCaption('Topics' as CaptionToken)}
             </div>
             <div>
               <ChipBar chips={topicChips} onChipClick={onTopicToggle}/>
@@ -84,7 +87,7 @@ const TeacherAssistant = ({topics, themes, levels, processing, onGenerateQuestio
 
           <div className="flex flex-col gap-8">
             <div className="uppercase text-sm font-semibold text-dark-gray">
-              Level
+            {getCaption('Level' as CaptionToken)}
             </div>
             <div>
               <LevelBar chips={levelChips} onChipClick={onLevelToggle}/>
@@ -93,7 +96,7 @@ const TeacherAssistant = ({topics, themes, levels, processing, onGenerateQuestio
 
           <div className="flex flex-col gap-8">
             <div className="uppercase text-sm font-semibold text-dark-gray">
-              Themes
+            {getCaption('Themes' as CaptionToken)}
             </div>
             <div>
               <ChipBar chips={themeChips} onChipClick={onThemeToggle}/>
@@ -103,7 +106,7 @@ const TeacherAssistant = ({topics, themes, levels, processing, onGenerateQuestio
           <div>
             <div className="flex gap-4 flex-col">
               <RunButton processing={processing} onClick={handleGenerateQuestion} icon="/icons/light.svg">
-                Generate Question
+              {getCaption('Generate Question' as CaptionToken)}
               </RunButton>
             </div>
           </div>  
