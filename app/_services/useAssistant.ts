@@ -37,14 +37,10 @@ function preserveBacktickContent(originalString: string | null, translatedString
         backtickContent.push(match[1]);
     }
 
-    console.log(backtickContent)
-    console.log(translatedString)
-
     const replacedString = replaceCodeBlocks(translatedString, backtickContent)
+    const stringWithoutUnwantedText = replacedString.replace('הנה תרגום התרגיל לעברית:', '').replace('הנה תרגום לעברית:','').replace('הנה תרגום הקוד לעברית:','')
 
-    console.log(replacedString)
-
-    return replacedString;
+    return stringWithoutUnwantedText;
 }
 
 export const useAssistant = () => {

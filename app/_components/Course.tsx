@@ -15,7 +15,7 @@ const Course = ({ course, editMode }: { course: ICourse, editMode?: boolean }) =
             title: course?.title,
             description: course?.description
         }}>
-            <CourseModules courseId={course._id} modules={course.modules} editMode={editMode}/> 
+            <CourseModules courseId={course._id} modules={course.modules}/> 
         </Section>
     )
 }

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Button from "./base/Button";
 import { useLocality } from "_helpers/client/useLocality";
 import { useCaptions } from "_helpers/client/useCaptions";
+import { useEditMode } from "_helpers/client/useEditMode";
 
 type AccordionItem = {
     id: string,
@@ -17,14 +18,15 @@ type ModuleItemProps = {
     editMode?: boolean, 
     onEnter?: any, 
     onEdit?: any, 
+    isEditMode?: boolean,
     onViewResults?: any
 }
 
-const ModuleItem = ({item, onEnter, editMode}: ModuleItemProps) => {    
+const ModuleItem = ({item, onEnter, isEditMode}: ModuleItemProps) => {    
 
     const { direction } = useLocality()
     const { getCaption } = useCaptions()
-
+    
     return (
         <div className='relative box-shadow rounded-md p-6 group cursor-pointer' onClick={onEnter}>
             <div className='flex gap-4'>
@@ -42,13 +44,13 @@ const ModuleItem = ({item, onEnter, editMode}: ModuleItemProps) => {
                 </div>
             </div>
             <div className={`absolute bottom-6 ${direction === 'rtl' ? 'left-6' : 'right-6'} flex gap-4 opacity-0 group-hover:opacity-100`}>
-                {!editMode && <Button underline caption={getCaption("Start")} onClick={onEnter}/>}
+                {!isEditMode && <Button underline caption={getCaption("Start")} onClick={onEnter}/>}
             </div>
         </div>
     )
 }
 
-const Module = ({courseId, module, editMode}: {courseId: string, module: IModule, editMode?: boolean}) => {
+const Module = ({courseId, module, isEditMode}: {courseId: string, module: IModule, isEditMode?: boolean}) => {
 
     const router = useRouter();
 
@@ -72,8 +74,8 @@ const Module = ({courseId, module, editMode}: {courseId: string, module: IModule
                         <div key={item._id}>
                             <ModuleItem 
                                 item={item} 
-                                editMode={editMode} 
-                                onEnter={() => editMode ? handleViewResults(item._id) : handleOpenItem(courseId, module._id, item._id)}
+                                isEditMode={isEditMode} 
+                                onEnter={() => isEditMode ? handleViewResults(item._id) : handleOpenItem(courseId, module._id, item._id)}
                                 />
                         </div>
                     ))}
@@ -83,9 +85,10 @@ const Module = ({courseId, module, editMode}: {courseId: string, module: IModule
     )
 }
 
-const CourseModules = ({ courseId, modules, editMode }: {courseId: string, modules: IModule[], editMode?: boolean}) => {
+const CourseModules = ({ courseId, modules}: {courseId: string, modules: IModule[]}) => {
 
     const router = useRouter();
+    const { isEditMode } = useEditMode()
 
     const [accordionItems, setAccordionItems] = useState<AccordionItem[]>([])
 
@@ -93,17 +96,17 @@ const CourseModules = ({ courseId, modules, editMode }: {courseId: string, modul
         const modulesItems: AccordionItem[] = modules?.map((module) => ({
             id: module._id,
             title: module.title,
-            content: <Module courseId={courseId} module={module} editMode={editMode}/>
+            content: <Module courseId={courseId} module={module} isEditMode={isEditMode}/>
         })) || []
         setAccordionItems(modulesItems)
-    }, [modules])
+    }, [modules, isEditMode])
 
     const handleAddToItem = (itemId: string) => {
       router.push(`/builder`)
     }
 
     return (
-        <Accordion items={accordionItems} editMode={editMode} onAddToItem={handleAddToItem}/>
+        <Accordion items={accordionItems} editMode={isEditMode} onAddToItem={handleAddToItem}/>
     )
 }
 

@@ -40,7 +40,7 @@ const ItemPage = ({ params: { itemId } }: any) => {
             status: 'submitted'
         },
         {
-            id: 'cxczz',
+            id: 'cxczz1',
             courseId: 'sdsds',
             moduleId: 'sssds',
             user: {
@@ -52,7 +52,7 @@ const ItemPage = ({ params: { itemId } }: any) => {
             status: 'inProgress'
         },
         {
-            id: 'cxczz',
+            id: 'cxczz2',
             courseId: 'sdsds',
             moduleId: 'sssds',
             user: {
@@ -65,7 +65,7 @@ const ItemPage = ({ params: { itemId } }: any) => {
             status: 'submitted'
         },
         {
-            id: 'cxczz',
+            id: 'cxczz3',
             courseId: 'sdsds',
             moduleId: 'sssds',
             user: {
@@ -78,7 +78,7 @@ const ItemPage = ({ params: { itemId } }: any) => {
             status: 'submitted'
         },
         {
-            id: 'cxczz',
+            id: 'cxczz4',
             courseId: 'sdsds',
             moduleId: 'sssds',
             user: {
@@ -90,7 +90,7 @@ const ItemPage = ({ params: { itemId } }: any) => {
             status: 'inProgress'
         },
         {
-            id: 'cxczz',
+            id: 'cxczz5',
             courseId: 'sdsds',
             moduleId: 'sssds',
             user: {
