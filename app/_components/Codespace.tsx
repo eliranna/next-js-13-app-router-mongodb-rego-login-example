@@ -17,6 +17,7 @@ import StudentAssistant from './StudentAssistant';
 import { useAssistant } from '_services/useAssistant';
 import { Language } from '_helpers/client/useLocality';
 import { boolean } from 'joi';
+import AuthorBar from './AuthorBar';
 
 type assistantSugggestions = 
   'Explain the question' 
@@ -99,6 +100,11 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
     resetMessageStream(message)
   },[message])
 
+  useEffect(() => {
+    toggleAssistantPanel(true)
+    handleSuggestionClick('Estimate student\'s progress')
+  },[isTeacher])
+
   const handleExecute = () => {
     compile(71, code, customInput);
   };
@@ -142,8 +148,15 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
           <Panel defaultSize={35} minSize={20}>
             <PanelGroup direction="vertical">
               <Panel defaultSize={30} minSize={20} collapsible collapsedSize={5}>
-                <div className='h-full flex flex-col overflow-y-scroll'>
-                  <Instructions description={task?.description}/>
+                <div className='flex flex-col gap-10'>
+                  { isTeacher && (
+                    <div>
+                      <AuthorBar/>
+                    </div>
+                  )}
+                  <div className='h-full flex flex-col overflow-y-scroll'>
+                    <Instructions description={task?.description}/>
+                  </div>
                 </div>                
               </Panel>
               <ResizeHandle direction="vertical"/>

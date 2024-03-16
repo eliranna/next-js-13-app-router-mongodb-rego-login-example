@@ -36,7 +36,8 @@ const ItemPage = ({ params: { itemId } }: any) => {
                 lastName: 'פייבר',
                 photo: "https://res.cloudinary.com/dfdk4g2pj/image/upload/v1710543269/image_40_sx7mjc.png"
             },
-            status: 'inProgress'
+            grade: 100,
+            status: 'submitted'
         },
         {
             id: 'cxczz',
@@ -48,8 +49,7 @@ const ItemPage = ({ params: { itemId } }: any) => {
                 lastName: 'סולומון',
                 photo: "https://res.cloudinary.com/dfdk4g2pj/image/upload/v1710543346/image_37_ytyodi_1_fei18z.png"
             },
-            grade: 100,
-            status: 'submitted'
+            status: 'inProgress'
         },
         {
             id: 'cxczz',
@@ -61,7 +61,8 @@ const ItemPage = ({ params: { itemId } }: any) => {
                 lastName: 'קומאן',
                 photo: "https://res.cloudinary.com/dfdk4g2pj/image/upload/v1710543457/elirannatan_A_13_year_old_american_korean_student_wearing_black_fc4b7b83-58f4-4480-a6d2-cb874b754aa9_v49avg_1_iu6asw.png"
             },
-            status: 'notStarted'
+            grade: 82,
+            status: 'submitted'
         },
         {
             id: 'cxczz',
@@ -73,7 +74,8 @@ const ItemPage = ({ params: { itemId } }: any) => {
                 lastName: 'נאגאמו',
                 photo: "https://res.cloudinary.com/dfdk4g2pj/image/upload/v1710543526/0_0_ssjld9_1_umda6n.png"
             },
-            status: 'inProgress'
+            grade: 98,
+            status: 'submitted'
         },
         {
             id: 'cxczz',
