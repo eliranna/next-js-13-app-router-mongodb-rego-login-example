@@ -6,8 +6,29 @@ const DEMO_MODE = true
 const demoCourseseHeb: ICourseInfo[] = [
     {
         _id: 'some-id',
-        title: 'מבוא לתכנות ואלגוריתמים בפייתון',
+        title: 'מבוא לתכנות בפייתון',
         coverImage: 'https://cdn.midjourney.com/7cdaa524-a266-4797-ba17-f8415f48219d/0_3.webp',
+        location: 'כיתה 201',
+        dateAndTime: 'מידי יום שני החל מ-12:00 ועד 14:30', 
+    },
+    {
+        _id: 'some-id2',
+        title: 'מבוא למדעי המחשב',
+        coverImage: 'https://cdn.midjourney.com/08e3b11f-2643-446a-81f2-d35225a2b314/0_0.webp',
+        location: 'כיתה 201',
+        dateAndTime: 'מידי יום שני החל מ-12:00 ועד 14:30', 
+    },
+    {
+        _id: 'some-id3',
+        title: 'תורת החישוביות',
+        coverImage: 'https://cdn.midjourney.com/86ef5964-c3fb-445e-9a32-b32b6b0e85d1/0_1.webp',
+        location: 'כיתה 201',
+        dateAndTime: 'מידי יום שני החל מ-12:00 ועד 14:30', 
+    },
+    {
+        _id: 'some-id4',
+        title: 'מבוא למספרים מרוכבים',
+        coverImage: 'https://cdn.midjourney.com/9a4924c0-315a-42f8-a2e7-0a7863f31e16/0_3.webp',
         location: 'כיתה 201',
         dateAndTime: 'מידי יום שני החל מ-12:00 ועד 14:30', 
     }
@@ -91,6 +112,176 @@ const demoCourseHeb: ICourse = {
             {
                 _id: "module3",
                 title: "פונקציות ומודולים",
+                items: [
+                    {
+                        _id: "exercise9",
+                        type: "codingChallenge",
+                        title: "מחולל מד ליבס",
+                        description: "בנה משחק מד ליבס שבו המשתמשים מזינים מילים כדי ליצור סיפור מצחיק.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise10",
+                        type: "codingChallenge",
+                        title: "ממיר הטמפרטורות",
+                        description: "כתוב פונקציה שממירה טמפרטורות בין פרנהייט לצלזיוס.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise11",
+                        type: "codingChallenge",
+                        title: "כיף פיטנס",
+                        description: "פתח מודול שמחשב מדדי כושר שונים, כמו BMI.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise12",
+                        type: "codingChallenge",
+                        title: "פולט אימייל",
+                        description: "צור פונקציה שמוציאה את שם המשתמש ושם הדומיין מכתובת אימייל.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                ]
+            },
+            {
+                _id: "module4",
+                title: "מבני נתונים בפייתון",
+                items: [
+                    {
+                        _id: "exercise9",
+                        type: "codingChallenge",
+                        title: "מחולל מד ליבס",
+                        description: "בנה משחק מד ליבס שבו המשתמשים מזינים מילים כדי ליצור סיפור מצחיק.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise10",
+                        type: "codingChallenge",
+                        title: "ממיר הטמפרטורות",
+                        description: "כתוב פונקציה שממירה טמפרטורות בין פרנהייט לצלזיוס.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise11",
+                        type: "codingChallenge",
+                        title: "כיף פיטנס",
+                        description: "פתח מודול שמחשב מדדי כושר שונים, כמו BMI.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise12",
+                        type: "codingChallenge",
+                        title: "פולט אימייל",
+                        description: "צור פונקציה שמוציאה את שם המשתמש ושם הדומיין מכתובת אימייל.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                ]
+            },
+            {
+                _id: "module4",
+                title: "טיפול בקבצים",
+                items: [
+                    {
+                        _id: "exercise9",
+                        type: "codingChallenge",
+                        title: "מחולל מד ליבס",
+                        description: "בנה משחק מד ליבס שבו המשתמשים מזינים מילים כדי ליצור סיפור מצחיק.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise10",
+                        type: "codingChallenge",
+                        title: "ממיר הטמפרטורות",
+                        description: "כתוב פונקציה שממירה טמפרטורות בין פרנהייט לצלזיוס.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise11",
+                        type: "codingChallenge",
+                        title: "כיף פיטנס",
+                        description: "פתח מודול שמחשב מדדי כושר שונים, כמו BMI.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise12",
+                        type: "codingChallenge",
+                        title: "פולט אימייל",
+                        description: "צור פונקציה שמוציאה את שם המשתמש ושם הדומיין מכתובת אימייל.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                ]
+            },
+            {
+                _id: "module4",
+                title: "תכנות מונחה עצמים",
+                items: [
+                    {
+                        _id: "exercise9",
+                        type: "codingChallenge",
+                        title: "מחולל מד ליבס",
+                        description: "בנה משחק מד ליבס שבו המשתמשים מזינים מילים כדי ליצור סיפור מצחיק.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise10",
+                        type: "codingChallenge",
+                        title: "ממיר הטמפרטורות",
+                        description: "כתוב פונקציה שממירה טמפרטורות בין פרנהייט לצלזיוס.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise11",
+                        type: "codingChallenge",
+                        title: "כיף פיטנס",
+                        description: "פתח מודול שמחשב מדדי כושר שונים, כמו BMI.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise12",
+                        type: "codingChallenge",
+                        title: "פולט אימייל",
+                        description: "צור פונקציה שמוציאה את שם המשתמש ושם הדומיין מכתובת אימייל.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                ]
+            },
+            {
+                _id: "module4",
+                title: "ספריות חיצוניות",
+                items: [
+                    {
+                        _id: "exercise9",
+                        type: "codingChallenge",
+                        title: "מחולל מד ליבס",
+                        description: "בנה משחק מד ליבס שבו המשתמשים מזינים מילים כדי ליצור סיפור מצחיק.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise10",
+                        type: "codingChallenge",
+                        title: "ממיר הטמפרטורות",
+                        description: "כתוב פונקציה שממירה טמפרטורות בין פרנהייט לצלזיוס.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise11",
+                        type: "codingChallenge",
+                        title: "כיף פיטנס",
+                        description: "פתח מודול שמחשב מדדי כושר שונים, כמו BMI.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise12",
+                        type: "codingChallenge",
+                        title: "פולט אימייל",
+                        description: "צור פונקציה שמוציאה את שם המשתמש ושם הדומיין מכתובת אימייל.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                ]
+            },
+            {
+                _id: "module4",
+                title: "פרוייקט סיום",
                 items: [
                     {
                         _id: "exercise9",

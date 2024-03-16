@@ -161,7 +161,6 @@ const moduleItemStore = create<IModuleItemStore>(() => initialState);
 function useModuleItemService(): IModuleItemService {
 
     const { language } = useLocality()
-    const [demoSample, _ ] = useState<IModuleItem>(demoSampleEng)
 
     const { moduleItem } = moduleItemStore();
     const fetch = useFetch();

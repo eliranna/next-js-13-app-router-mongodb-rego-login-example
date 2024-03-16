@@ -30,7 +30,7 @@ const Dashboard = () => {
                             {getCaption('My Courses')}
                         </span>
                     </div>
-                    <div className="lg:col-start-4 lg:col-span-7 flex gap-10">
+                    <div className="lg:col-start-4 lg:col-span-9 flex gap-10 flex-wrap">
                         {courses?.length && courses.map(course => (
                             <CourseCard key={course._id} course={course} onViewCourse={() => handleViewCourse(course._id)}/>
                         ))}              

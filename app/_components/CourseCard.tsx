@@ -9,7 +9,7 @@ const CourseCard = ({course, onViewCourse}: {course: ICourseInfo, onViewCourse: 
   
   return (
     <div className='w-[350px] rounded-t-md'>
-      <div className='w-full h-[350px] rounded-t-md'>
+      <div className='w-full h-[250px] rounded-t-md'>
         <Image src={course.coverImage} className='w-full h-full rounded-t-md bg-center'/>
       </div>
       <div className='bg-apple-gray p-6 rounded-b-xl h-[200px]'>

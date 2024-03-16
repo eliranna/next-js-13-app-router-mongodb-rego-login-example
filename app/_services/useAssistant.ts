@@ -3,7 +3,7 @@ import { useChat, Message } from "ai/react"
 import { useEffect, useState } from "react"
 
 const composeTranslationPrompt = (content: string, languageName: LanguageName) => {
-    return `Translate the following to ${languageName} and DO NOT write anything else except the translation result: ${content}. `
+    return `Translate the following to ${languageName}: ${content}. `
 }
 
 function replaceCodeBlocks(s: string, replacements: string[]) {
@@ -38,6 +38,7 @@ function preserveBacktickContent(originalString: string | null, translatedString
     }
 
     console.log(backtickContent)
+    console.log(translatedString)
 
     const replacedString = replaceCodeBlocks(translatedString, backtickContent)
 
@@ -89,6 +90,8 @@ export const useAssistant = () => {
         if (!cludeIsLoading && cludeMessages && cludeMessages.length > 0 ) {
             const original = GPTLastResponse
             const translated = cludeMessages[cludeMessages.length - 1].content
+            console.log(original)
+            console.log(translated)
             const fixed: string | null = preserveBacktickContent(original, translated)
             console.log(fixed)
             setMessage(fixed)

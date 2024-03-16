@@ -75,7 +75,7 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
 
   const ref = useRef<ImperativePanelHandle>(null);
 
-  const { append, message, messageStream, resetMessageStream } = useAssistant();
+  const { append, messageStream, resetMessageStream } = useAssistant();
 
   useEffect(() => {
     task && setCode(task.initialCode || '')

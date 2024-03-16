@@ -183,7 +183,7 @@ const QBuilder = () => {
               {getCaption("Publish" as CaptionToken)}
             </RunButton>
           </div>
-          <div className="border border-[#dddddd] h-full rounded-lg">
+          <div className="border border-[#dddddd] h-full rounded-lg p-8">
             <Instructions description={messageStream} processing={isLoading}/>
           </div>  
         </div>      

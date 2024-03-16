@@ -103,7 +103,7 @@ const CourseModules = ({ courseId, modules, editMode }: {courseId: string, modul
     }
 
     return (
-        <Accordion items={accordionItems} editMode={editMode} initialState={true} onAddToItem={handleAddToItem}/>
+        <Accordion items={accordionItems} editMode={editMode} onAddToItem={handleAddToItem}/>
     )
 }
 
