@@ -118,7 +118,7 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
 
   useEffect(() => {
     if (isAssistantLoading === true) {
-      resetMessageStream()
+      resetMessageStream(null)
       if (!currentCaption || !task) return 
       const prompt: string | null = computePrompt(currentCaption, task, code)
       prompt && append({

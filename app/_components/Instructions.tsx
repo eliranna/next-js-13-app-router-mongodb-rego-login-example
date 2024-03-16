@@ -1,7 +1,7 @@
 import { useLocality } from "_helpers/client/useLocality"
 import Markdown from "./base/Markdown"
 
-const Instructions = ({title, description, processing}: {title?: string, description?: string, processing?: boolean}) => {
+const Instructions = ({title, description, processing}: {title?: string, description?: string | null, processing?: boolean}) => {
 
   const {language, direction} = useLocality()
 

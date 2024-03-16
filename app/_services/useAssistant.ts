@@ -6,7 +6,29 @@ const composeTranslationPrompt = (content: string, languageName: LanguageName) =
     return `Translate the following to ${languageName} and DO NOT write anything else except the translation result: ${content}. `
 }
 
-function preserveBacktickContent(originalString: string, translatedString: string) {
+function replaceCodeBlocks(s: string, replacements: string[]) {
+  // Regular expression to match code blocks
+  const regex = /```(.*?)```/gs;
+  let match;
+  let i = 0; // To keep track of the replacement index
+  
+  // Replace each match with the corresponding element from the replacements array
+  const replacedString = s.replace(regex, (match) => {
+    if (i >= replacements.length) {
+      // If there are more matches than replacements, return the match itself
+      return match;
+    }
+    // Replace the match with the corresponding replacement and increment the index
+    return `\`\`\`${replacements[i++]}\`\`\``;
+  });
+
+  return replacedString;
+}
+
+function preserveBacktickContent(originalString: string | null, translatedString: string) {
+
+    if (!originalString) return null;
+    
     const backtickContent = [];
     const backtickRegex = /```(.*?)```/gs;
 
@@ -15,10 +37,11 @@ function preserveBacktickContent(originalString: string, translatedString: strin
         backtickContent.push(match[1]);
     }
 
-    let replacedString = translatedString;
-    backtickContent.forEach((content) => {
-        replacedString = replacedString.replace(/```(.*?)```/, '```' + content + '```');
-    });
+    console.log(backtickContent)
+
+    const replacedString = replaceCodeBlocks(translatedString, backtickContent)
+
+    console.log(replacedString)
 
     return replacedString;
 }
@@ -36,7 +59,7 @@ export const useAssistant = () => {
     const { messages: gptMessages, append: appendToGpt, isLoading: gptIsLoading, setMessages: setGPTMessages } = useChat({api: '/api/gpt'})
     const { messages: cludeMessages, append: appendToClude, isLoading: cludeIsLoading, setMessages: setCludeMessages } = useChat({api: '/api/clude'})
 
-    const [GPTLastResponse, setGPTLastResponse] = useState<string>('')
+    const [GPTLastResponse, setGPTLastResponse] = useState<string | null>('')
     
     useEffect(() => {
         language && (language != 'en') && setTranslateOutput(true)
@@ -66,7 +89,8 @@ export const useAssistant = () => {
         if (!cludeIsLoading && cludeMessages && cludeMessages.length > 0 ) {
             const original = GPTLastResponse
             const translated = cludeMessages[cludeMessages.length - 1].content
-            const fixed: string = preserveBacktickContent(original, translated)
+            const fixed: string | null = preserveBacktickContent(original, translated)
+            console.log(fixed)
             setMessage(fixed)
             setIsLoading(false)
         }
@@ -78,10 +102,20 @@ export const useAssistant = () => {
         return assistantMessages && assistantMessages[assistantMessages.length - 1] && assistantMessages[assistantMessages.length - 1].content
     }
 
-    const resetMessageStream = () => {
-        setMessageStream(null)
-        setGPTMessages([])
-        setCludeMessages([])
+    const resetMessageStream = (content: string | null) => {
+        setMessageStream(content)
+        setMessage(content)
+        setGPTLastResponse(content)
+        content ? setGPTMessages([{
+            id: 'some-id',
+            content,
+            role: 'assistant'
+        }]) : setGPTMessages([])
+        content ? setCludeMessages([{
+            id: 'some-id',
+            content,
+            role: 'assistant'
+        }]) : setGPTMessages([])
     }
 
     return {
@@ -90,6 +124,10 @@ export const useAssistant = () => {
         resetMessageStream,
         append: async (message: Message) => {
             setMessage(null)
+            setMessageStream(null)
+            setGPTLastResponse(null)
+            setGPTMessages([])
+            setCludeMessages([])
             setIsLoading(true)
             await appendToGpt(message)
         },

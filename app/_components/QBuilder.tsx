@@ -8,6 +8,7 @@ import Grid from "./base/Grid";
 import SectionHeader from "./SectionHeader";
 import Section from "./Section";
 import RunButton from "./base/RunButton";
+import { useAssistant } from "_services/useAssistant";
 
 const pythonTopics: Topic[] = [
   {
@@ -130,19 +131,42 @@ const composePrompt = (level: string, themes: string[], topics: string[]) => {
 
 const QBuilder = () => {
 
-    const { append, messages, isLoading } = useChat({api: '/api/gpt'});
-    const [questionBody, setQuestionBody] = useState<string>("");
+    const { append, messageStream, resetMessageStream, message } = useAssistant();
+    const [isLoading, setIsLoading] = useState(false)
+
+    const [query, setQuery] = useState<QuestionGenerationQuery>()
+
+    const handleQuestionGeneration = (questionGenerationQuery: QuestionGenerationQuery) => {
+      resetMessageStream(null)
+      setQuery(questionGenerationQuery)
+    }
 
     useEffect(() => {
-        messages && messages.length > 0 && messages[messages.length-1].role != 'user' && setQuestionBody(messages[messages.length-1].content)
-    }, [messages])
+      resetMessageStream(message)
+    },[message])
 
-    const handleQuestionGeneration = async (questionGenerationQuery: QuestionGenerationQuery) => {
-        await append({
-            content: composePrompt(questionGenerationQuery.level, questionGenerationQuery.themes, questionGenerationQuery.topics),
-            role: 'user'
-        })    
-    } 
+    useEffect(() => {
+      if (query) {
+        setIsLoading(true)
+        resetMessageStream(null)
+      }
+    }, [query])
+
+    useEffect(() => {
+      if ((isLoading === true) && query) {
+        append({
+          id: 'some-id',
+          content: composePrompt(query.level, query.themes, query.topics),
+          role: 'user'
+        })   
+      }
+    }, [isLoading])  
+    
+    useEffect(() => {
+      if (messageStream) {
+        setIsLoading(false)
+      }
+    }, [messageStream])
     
     return (
       <Section header={{
@@ -156,7 +180,7 @@ const QBuilder = () => {
             </RunButton>
           </div>
           <div className="border border-[#dddddd] h-full rounded-lg">
-            <Instructions description={questionBody} processing={isLoading}/>
+            <Instructions description={messageStream} processing={isLoading}/>
           </div>  
         </div>      
       </Section>
