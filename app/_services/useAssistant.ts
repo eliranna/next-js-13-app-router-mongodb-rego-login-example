@@ -63,12 +63,12 @@ export const useAssistant = () => {
     const [GPTLastResponse, setGPTLastResponse] = useState<string | null>('')
     
     useEffect(() => {
-        language && (language != 'en') && setTranslateOutput(true)
+        if (language === 'en') {
+            setTranslateOutput(false)
+        } else {
+            setTranslateOutput(true)
+        }
     }, [language])
-
-    useEffect(() => {
-        setMessageStream(getMessageStream())
-    }, [gptMessages, cludeMessages])
 
     useEffect(() => {
         !gptIsLoading && gptMessages && gptMessages.length > 0 && setGPTLastResponse(gptMessages[gptMessages.length-1].content)
@@ -123,7 +123,7 @@ export const useAssistant = () => {
 
     return {
         message,
-        messageStream,
+        messageStream: getMessageStream(),
         resetMessageStream,
         append: async (message: Message) => {
             setMessage(null)

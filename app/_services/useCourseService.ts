@@ -178,7 +178,7 @@ const demoCourseHeb: ICourse = {
                 ]
             },
             {
-                _id: "module4",
+                _id: "module5",
                 title: "טיפול בקבצים",
                 items: [
                     {
@@ -212,7 +212,7 @@ const demoCourseHeb: ICourse = {
                 ]
             },
             {
-                _id: "module4",
+                _id: "module6",
                 title: "תכנות מונחה עצמים",
                 items: [
                     {
@@ -246,7 +246,7 @@ const demoCourseHeb: ICourse = {
                 ]
             },
             {
-                _id: "module4",
+                _id: "module7",
                 title: "ספריות חיצוניות",
                 items: [
                     {
@@ -280,7 +280,7 @@ const demoCourseHeb: ICourse = {
                 ]
             },
             {
-                _id: "module4",
+                _id: "module8",
                 title: "פרוייקט סיום",
                 items: [
                     {

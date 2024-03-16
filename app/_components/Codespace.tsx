@@ -75,7 +75,7 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
 
   const ref = useRef<ImperativePanelHandle>(null);
 
-  const { append, messageStream, resetMessageStream } = useAssistant();
+  const { append, message, messageStream, resetMessageStream } = useAssistant();
 
   useEffect(() => {
     task && setCode(task.initialCode || '')
@@ -94,6 +94,10 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
       setIsAssistantLoading(false)
     }
   }, [messageStream])
+
+  useEffect(() => {
+    resetMessageStream(message)
+  },[message])
 
   const handleExecute = () => {
     compile(71, code, customInput);
