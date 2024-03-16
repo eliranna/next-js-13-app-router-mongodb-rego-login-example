@@ -101,8 +101,10 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
   },[message])
 
   useEffect(() => {
-    toggleAssistantPanel(true)
-    handleSuggestionClick('Estimate student\'s progress')
+    if (isTeacher) {
+      toggleAssistantPanel(true)
+      handleSuggestionClick('Estimate student\'s progress')
+    }
   },[isTeacher])
 
   const handleExecute = () => {
