@@ -127,32 +127,26 @@ const demoSampleHeb: IModuleItem = {
 תרגיל זה יבחן את יכולתך ליישם מושגי תכנות פייתון במצב מורכב ודומה למציאות, הדורש פתרון בעיות, יישום אלגוריתמים בסיסיים ומיומנויות עיבוד נתונים.
     
     `,
-    initialCode: `
-    import random
+    initialCode: `import random
 
-    # Define the planet grid and robot parameters
+# Define the planet grid and robot parameters
+grid_size = 10
+num_samples = 10
+print(grid_size, num_samples)
     
-    # Initialize the grid with None values
-    
-    # Place samples randomly on the grid
-    
-    # Define the robot
-    class SpaceRobot:
-        def __init__(self):
-    
-        def move(self, direction):
-    
-        def check_sample(self):
-    
-        def report(self):
-    
-    # Initialize the robot
-    robot = SpaceRobot()
-    
-    # Example movements
+# Initialize the grid with None values
+grid = [[None for _ in range(grid_size)] for _ in range(grid_size)]
 
-    
-    # Print report
+# Place samples randomly on the grid
+
+# Define the robot
+
+# Initialize the robot
+# robot = SpaceRobot()
+
+# Example movements
+
+# Print report
     `,
 }
 

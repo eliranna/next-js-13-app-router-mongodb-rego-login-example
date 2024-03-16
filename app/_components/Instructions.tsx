@@ -6,7 +6,7 @@ const Instructions = ({title, description, processing}: {title?: string, descrip
   const {language, direction} = useLocality()
 
   return (
-      <div lang={language} dir={direction} className='flex flex-col p-10'>
+      <div lang={language} dir={direction} className='flex flex-col overflow-x-hidden'>
         <div className='text-4xl font-light'>
           {title}
         </div>
