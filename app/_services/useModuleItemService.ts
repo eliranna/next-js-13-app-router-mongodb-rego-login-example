@@ -167,7 +167,7 @@ const moduleItemStore = create<IModuleItemStore>(() => initialState);
 function useModuleItemService(): IModuleItemService {
 
     const { language } = useLocality()
-    const [demoSample, setDemoSample] = useState<IModuleItem>(demoSampleEng)
+    const [demoSample, _ ] = useState<IModuleItem>(demoSampleEng)
 
     const { moduleItem } = moduleItemStore();
     const fetch = useFetch();
@@ -179,9 +179,8 @@ function useModuleItemService(): IModuleItemService {
     return {
         moduleItem,
         getById: async (courseId: string, moduleId: string, itemId: string) => {
-
             if (DEMO_MODE) {
-                moduleItemStore.setState({ moduleItem: demoSample });
+                moduleItemStore.setState({moduleItem: language === 'en' ? demoSampleEng : demoSampleHeb});
                 return
             }
             moduleItemStore.setState({ moduleItem: undefined });

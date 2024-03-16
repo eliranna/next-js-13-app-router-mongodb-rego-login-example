@@ -3,11 +3,15 @@ import Grid from "./base/Grid"
 import { Page } from "./base/Page"
 import CourseModules from "./CourseModules"
 import Section from "./Section"
+import { useCaptions } from "_helpers/client/useCaptions"
 
 const Course = ({ course, editMode }: { course: ICourse, editMode?: boolean }) => {
+
+    const { getCaption } = useCaptions()
+
     return (
         <Section header={{
-            topic: 'Course Page',
+            topic: getCaption('Course Page'),
             title: course?.title,
             description: course?.description
         }}>

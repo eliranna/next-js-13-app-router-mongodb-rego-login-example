@@ -1,6 +1,131 @@
 import { useFetch } from "_helpers/client";
 import { create } from "zustand";
 
+const DEMO_MODE = true
+
+const demoCourseseHeb: ICourseInfo[] = [
+    {
+        _id: 'some-id',
+        title: 'מבוא לתכנות ואלגוריתמים בפייתון',
+        coverImage: 'https://cdn.midjourney.com/7cdaa524-a266-4797-ba17-f8415f48219d/0_3.webp',
+        location: 'כיתה 201',
+        dateAndTime: 'מידי יום שני החל מ-12:00 ועד 14:30', 
+    }
+]
+
+const demoCourseHeb: ICourse = {
+        _id: 'some-id',
+        title: 'מבוא לתכנות ואלגוריתמים בפייתון',
+        description: 'קורס יסודי שנועד ללמד מתחילים את היסודות של תכנות בפייתון, כולל תחביר, מבני נתונים ואלגוריתמים בסיסיים, עם גישה מעשית לפתרון בעיות מהעולם האמיתי.',
+        coverImage: 'https://cdn.midjourney.com/7cdaa524-a266-4797-ba17-f8415f48219d/0_3.webp',
+        modules: [
+            {
+            _id: "65ef6b8a2a17b1fca9535096",
+            title: "הקדמה לפייתון",
+            items: [
+                    {
+                    _id: "65ef6b382a17b1fca9535094",
+                    type: "codingChallenge",
+                    title: "שלום, פייתון!",
+                    description: "כתוב תוכנית שמדפיסה 'שלום, עולם!' לקונסול.",
+                    timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                    _id: "exercise2",
+                    type: "codingChallenge",
+                    title: "פייתון פואטי",
+                    description: "צור סקריפט שמוציא פואמה או האיקו בשלוש שורות.",
+                    timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                    _id: "exercise3",
+                    type: "codingChallenge",
+                    title: "מחשבון שם וגיל",
+                    description: "כתוב תוכנית שמקבלת את שם וגיל המשתמש, ואז מחשבת את השנה בה הוא נולד.",
+                    timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                    _id: "exercise4",
+                    type: "codingChallenge",
+                    title: "יוצר רשימת קניות",
+                    description: "פתח סקריפט שעוזר למשתמשים ליצור רשימה של פריטים לקנות מהסופר.",
+                    timeLeft: 'נותרו 5 ימים'
+                    },
+                ]
+            },
+            // Follow the same structure for the remaining modules...
+            {
+                _id: "module2",
+                title: "מבני בקרה",
+                items: [
+                    {
+                        _id: "exercise5",
+                        type: "codingChallenge",
+                        title: "בניית רובוט חלל",
+                        description: "צור משחק הרפתקאות טקסטואלי פשוט שנותן למשתמשים לבחור.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise6",
+                        type: "codingChallenge",
+                        title: "אבן, נייר, מספריים, פייתון!",
+                        description: "כתוב משחק של אבן, נייר, מספריים שהמשתמש משחק מול המחשב.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise7",
+                        type: "codingChallenge",
+                        title: "מיין את הציונים",
+                        description: "פתח תוכנית שמיינת רשימת ציונים מהגבוה לנמוך.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise8",
+                        type: "codingChallenge",
+                        title: "מסע דרך הלולאה",
+                        description: "צור סקריפט שמשתמש בלולאות כדי להדפיס את כל המספרים מ-1 עד 100.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                ]
+            },
+            {
+                _id: "module3",
+                title: "פונקציות ומודולים",
+                items: [
+                    {
+                        _id: "exercise9",
+                        type: "codingChallenge",
+                        title: "מחולל מד ליבס",
+                        description: "בנה משחק מד ליבס שבו המשתמשים מזינים מילים כדי ליצור סיפור מצחיק.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise10",
+                        type: "codingChallenge",
+                        title: "ממיר הטמפרטורות",
+                        description: "כתוב פונקציה שממירה טמפרטורות בין פרנהייט לצלזיוס.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise11",
+                        type: "codingChallenge",
+                        title: "כיף פיטנס",
+                        description: "פתח מודול שמחשב מדדי כושר שונים, כמו BMI.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                    {
+                        _id: "exercise12",
+                        type: "codingChallenge",
+                        title: "פולט אימייל",
+                        description: "צור פונקציה שמוציאה את שם המשתמש ושם הדומיין מכתובת אימייל.",
+                        timeLeft: 'נותרו 5 ימים'
+                    },
+                ]
+            }
+            // Add additional modules following the same pattern
+          ]
+}
+
 const initialState = {
     course: undefined,
     courses: undefined
@@ -28,6 +153,10 @@ function useCourseService(): ICourseService {
         courses,
         getById: async (id: string) => {
             courseStore.setState({ course: undefined });
+            if (DEMO_MODE) {
+                courseStore.setState({ course: demoCourseHeb });
+                return 
+            }
             try {
                 courseStore.setState({ course: await fetch.get(`/api/courses/${id}`) });
             } catch (error: any) {
@@ -36,6 +165,10 @@ function useCourseService(): ICourseService {
             }
         },
         getUserCoursesSummary: async () => {
+            if (DEMO_MODE) {
+                courseStore.setState({ courses: demoCourseseHeb });
+                return 
+            }
             courseStore.setState({ courses: await fetch.get('/api/courses') });
         },
     }
@@ -76,7 +209,8 @@ export type IModuleItem = {
     title: string,
     description?: string,
     initialCode?: string,
-    questions?: IQuestion[]
+    questions?: IQuestion[],
+    timeLeft?: any
 }
 
 export type IInputType = 'text' | 'code' | 'math' | 'selection'

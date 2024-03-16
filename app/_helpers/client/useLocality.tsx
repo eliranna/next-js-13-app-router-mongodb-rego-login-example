@@ -25,9 +25,9 @@ export type Direction = 'ltr' | 'rtl'
 // Create the provider component
 export const LocalityProvider: React.FC<LocalityProviderProps> = ({ children }) => {
 
-  const [language, setLanguage] = useState<Language>('en');
-  const [languageName, setLanguageName] = useState<LanguageName>('English');
-  const [direction, setDirection] = useState<Direction>('ltr');
+  const [language, setLanguage] = useState<Language>('he');
+  const [languageName, setLanguageName] = useState<LanguageName>('Hebrew');
+  const [direction, setDirection] = useState<Direction>('rtl');
 
   useEffect(() => {
     setDirection(language === 'en' ? 'ltr' : 'rtl')

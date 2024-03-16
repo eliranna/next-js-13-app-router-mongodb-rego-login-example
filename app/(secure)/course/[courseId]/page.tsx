@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import { useCourseService } from '_services';
 import Spinner from '_components/base/Spinner';
 import Course from '_components/Course';
-import RootLayout from '_components/RootLayout';
 import { useEditMode } from '_helpers/client/useEditMode';
 
 const CoursePage = ({ params: { courseId } }: any) => {

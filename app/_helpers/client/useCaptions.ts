@@ -49,6 +49,11 @@ export type CaptionToken =
     | "Generate Question"
     | "Publish"
     | "Title"
+    | "My Courses"
+    | "View Course"
+    | "Start"
+    | "Course Page"
+    | "Search student"
 
 type Dictionary = {
     [key in CaptionToken]: {
@@ -248,8 +253,27 @@ const dictionary: Dictionary = {
     "Title": {
         en: "Title",
         he: "כותרת"
+    },
+    "My Courses": {
+        en: "My Courses",
+        he: "השיעורים שלי"
+    },
+    "View Course": {
+        en: "View Course",
+        he: "הכנס לשיעור"
+    },
+    "Start": {
+        en: "Start",
+        he: "התחל"
+    },
+    "Course Page": {
+        en: "Course Page",
+        he: "עמוד השיעור"
+    },
+    "Search student": {
+        en: "Search student",
+        he: "חפש תלמיד"
     }
-
 }
 
 export const useCaptions = () => {

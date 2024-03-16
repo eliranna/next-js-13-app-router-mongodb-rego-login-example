@@ -6,6 +6,17 @@ import { useFetch } from '_helpers/client';
 
 export { useUserService };
 
+const DEMO_MODE = true
+
+const demoUser: IUser = {
+    id: 'some-id',
+    firstName: 'Eliran',
+    lastName: 'Natan',
+    username: 'koko',
+    password: 'w754e',
+    photo: 'string'
+}
+
 // user state store
 const initialState = {
     users: undefined,
@@ -64,6 +75,10 @@ function useUserService(): IUserService {
             }
         },
         getCurrent: async () => {
+            if (DEMO_MODE) {
+                userStore.setState({ currentUser: demoUser });
+                return
+            }
             if (!currentUser) {
                 userStore.setState({ currentUser: await fetch.get('/api/users/current') });
             }

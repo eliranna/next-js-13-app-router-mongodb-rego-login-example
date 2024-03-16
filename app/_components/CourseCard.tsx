@@ -1,8 +1,12 @@
 import Image from './base/Image';
 import { ICourseInfo } from '_services';
 import Button from './base/Button';
+import { useCaptions } from '_helpers/client/useCaptions';
 
 const CourseCard = ({course, onViewCourse}: {course: ICourseInfo, onViewCourse: any}) => {
+
+  const {getCaption} = useCaptions()
+  
   return (
     <div className='w-[350px] rounded-t-md'>
       <div className='w-full h-[350px] rounded-t-md'>
@@ -30,7 +34,7 @@ const CourseCard = ({course, onViewCourse}: {course: ICourseInfo, onViewCourse: 
                 </div>
               </div>
               <div className='flex justify-end'>
-                <Button underline caption='View Course' onClick={onViewCourse}/>
+                <Button underline caption={getCaption('View Course')} onClick={onViewCourse}/>
               </div> 
             </div>       
         </div>

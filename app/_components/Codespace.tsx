@@ -25,10 +25,10 @@ type assistantSugggestions =
 | 'How to continue?' 
 | 'Am I on the right track?'
 | "Estimate student's progress"
-| "Where does the student shows difficulties?"
+| "Where does the student show difficulties?"
 
 const studentAssistantSugggestions: assistantSugggestions[] = ['Explain the question', 'Give me a hint', 'How to start?', 'How to continue?', 'Am I on the right track?']
-const teacherAssistantSugggestions: assistantSugggestions[] = ["Estimate student's progress", "Where does the student shows difficulties?"]
+const teacherAssistantSugggestions: assistantSugggestions[] = ["Estimate student's progress", "Where does the student show difficulties?"]
 
 const computePrompt = (caption: assistantSugggestions, task: IModuleItem, code: string) => {
 
@@ -52,7 +52,7 @@ const computePrompt = (caption: assistantSugggestions, task: IModuleItem, code: 
     case "Estimate student's progress":
       return `Given the following python programming question: ${task.description}. The student has replayed with the following code: ${code}. is the given code is a good solution? if not, explain what is missing and how much it is far from solution. Grade this solution between 0 to 100 and tell us if the student is in the right direction or that it is not the right way.` 
       
-    case "Where does the student shows difficulties?":
+    case "Where does the student show difficulties?":
       return `Given the following python programming question: ${task.description}. The student has replayed with the following code: ${code}. According to this, list the main topics the student might be straggeling with and suggest ways to help him. However, if you think that that student shows no difficulties in the topic of the question, then tell this and offer some ways to take the student to the next level.`       
 
     default:

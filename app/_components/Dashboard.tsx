@@ -5,11 +5,13 @@ import { useCourseService } from '_services';
 import { useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import RootLayout from "./RootLayout";
+import { useCaptions } from "_helpers/client/useCaptions";
 
 const Dashboard = () => {
 
     const {courses, getUserCoursesSummary} = useCourseService();
     const router = useRouter()
+    const {getCaption} = useCaptions()
 
     useEffect(() => {
         getUserCoursesSummary()
@@ -25,7 +27,7 @@ const Dashboard = () => {
                 <Grid className='mt-20'>
                     <div className="lg:col-start-1 lg:col-span-3">
                         <span className='text-4xl'>
-                            My Courses
+                            {getCaption('My Courses')}
                         </span>
                     </div>
                     <div className="lg:col-start-4 lg:col-span-7 flex gap-10">
