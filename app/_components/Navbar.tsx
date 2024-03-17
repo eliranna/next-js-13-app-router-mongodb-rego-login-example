@@ -15,7 +15,7 @@ const Navbar = ({}) => {
                 <div className="h-full flex justify-between">
                     <div className="flex flex-col justify-center">
                         <Link href="/">
-                            <img src="/icons/atom.svg" className="invert w-[30px]"/>
+                            <img src="https://res.cloudinary.com/dfdk4g2pj/image/upload/v1710677607/image_31_dkwgzy.png" className="w-[45px]"/>
                         </Link>
                     </div>
                     <div className="h-full flex flex-row justify-end gap-6">

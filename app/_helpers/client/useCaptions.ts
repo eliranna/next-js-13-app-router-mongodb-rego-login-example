@@ -63,8 +63,8 @@ type Dictionary = {
 
 const dictionary: Dictionary = {
     'Python Assistant': {
-        en: 'Python Assistant',
-        he: 'העוזר הוירטואלי'
+        en: 'Alpha',
+        he: 'אלפא'
     },
     "Execute": {
         en: "Execute",

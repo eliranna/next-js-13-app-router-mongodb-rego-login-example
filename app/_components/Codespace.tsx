@@ -150,7 +150,7 @@ const Codespace = ({task, isTeacher}: {task?: IModuleItem, isTeacher: boolean}) 
           <Panel defaultSize={35} minSize={20}>
             <PanelGroup direction="vertical">
               <Panel defaultSize={30} minSize={20} collapsible collapsedSize={5}>
-                <div className='flex flex-col gap-10'>
+                <div className='flex flex-col gap-10 h-full'>
                   { isTeacher && (
                     <div>
                       <AuthorBar/>

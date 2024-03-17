@@ -42,6 +42,7 @@ const ModuleItem = ({ params: { courseId, moduleId, itemId } }: any) => {
     }, [router]);
 
     const getModuleItem = (moduleItem: IModuleItem) => {
+        console.log(moduleItem)
         switch (moduleItem.type) {
             case "codingChallenge":
                 return (

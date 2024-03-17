@@ -11,16 +11,16 @@ const AssistantPanel = ({message, isOpen, onToggle, isLoading, children}: {messa
     const topbar = (
         <div className="flex justify-between mb-6">
             <div className="flex gap-3">
-                <div>
-                    <img src="/icons/robot.svg" className="w-[25px]"/>
+                <div className="flex flex-col justify-center">
+                    <img src="https://res.cloudinary.com/dfdk4g2pj/image/upload/v1710677607/image_31_dkwgzy.png" className={`w-[35px]`}/>
                 </div>
-                <div>
+                <div className="flex flex-col justify-center">
                     <span>
                         {getCaption('Python Assistant')}
                     </span>
                 </div>
             </div>
-            <div>
+            <div className="flex flex-col justify-center">
                 <div onClick={onToggle} className="cursor-pointer">
                     <img src='/icons/down-arrow.svg' className={`w-[20px] ${isOpen ? 'rotate-0' : 'rotate-180'} transition-all`}/>
                 </div>
@@ -29,7 +29,7 @@ const AssistantPanel = ({message, isOpen, onToggle, isLoading, children}: {messa
     )
 
     return (
-        <div className="h-full flex flex-col p-6 overflow-y-scroll" dir={direction} lang={language}>
+        <div className="h-full flex flex-col overflow-y-scroll" dir={direction} lang={language}>
             <div>
                 {topbar}
             </div>

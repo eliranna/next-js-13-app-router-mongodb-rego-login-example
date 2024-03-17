@@ -183,7 +183,7 @@ const demoCourseHeb: ICourse = {
                 items: [
                     {
                         _id: "exercise9",
-                        type: "codingChallenge",
+                        type: "quiz",
                         title: "מחולל מד ליבס",
                         description: "בנה משחק מד ליבס שבו המשתמשים מזינים מילים כדי ליצור סיפור מצחיק.",
                         timeLeft: 'נותרו 5 ימים'
@@ -251,7 +251,7 @@ const demoCourseHeb: ICourse = {
                 items: [
                     {
                         _id: "exercise9",
-                        type: "codingChallenge",
+                        type: "quiz",
                         title: "מחולל מד ליבס",
                         description: "בנה משחק מד ליבס שבו המשתמשים מזינים מילים כדי ליצור סיפור מצחיק.",
                         timeLeft: 'נותרו 5 ימים'
