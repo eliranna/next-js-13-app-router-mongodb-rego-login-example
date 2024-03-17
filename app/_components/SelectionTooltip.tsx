@@ -14,7 +14,7 @@ const SelectionTooltip = ({position, onSelectionQuery}: {position: MousePosition
             cursor: 'pointer',
             zIndex: 1000
           }} onClick={onSelectionQuery}>
-            <img src="/icons/robot.svg" className='w-[25px]'/>
+            <img src="https://res.cloudinary.com/dfdk4g2pj/image/upload/v1710677607/image_31_dkwgzy.png" className='w-[25px]'/>
           </div>        
     )
 }
